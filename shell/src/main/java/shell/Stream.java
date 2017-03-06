@@ -15,6 +15,7 @@ public class Stream {
     }
 
     /**
+     * Read one line from stream
      * @return next line in stream or null if stream is empty
      */
     public String read() {
@@ -22,6 +23,7 @@ public class Stream {
     }
 
     /**
+     * Write one line to stream
      * @param val line to add to stream
      */
     public void write(String val) {
@@ -29,6 +31,7 @@ public class Stream {
     }
 
     /**
+     * Check if stream has more lines to read
      * @return true if stream has at least one line to read
      */
     public boolean hasNext() {
@@ -36,6 +39,7 @@ public class Stream {
     }
 
     /**
+     * String representation of a stream object
      * @return concatenated lines in stream
      */
     @Override

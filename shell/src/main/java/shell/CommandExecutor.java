@@ -12,6 +12,7 @@ public class CommandExecutor {
     private CommandExecutor() {}
 
     /**
+     * Sequentially executes chained list of commands.
      * @param commands List of Command objects
      * @return Stream object which contain result of a chain of computations
      */

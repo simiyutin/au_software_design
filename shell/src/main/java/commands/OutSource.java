@@ -8,6 +8,9 @@ import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Passes input arguments and stream to external shell and reads result from its stdout
+ */
 public class OutSource extends Command {
 
     private String commandName;

@@ -6,6 +6,9 @@ import shell.Stream;
 
 import java.util.List;
 
+/**
+ * Exits shell
+ */
 public class Exit extends Command {
 
     public static final String NAME = "exit";

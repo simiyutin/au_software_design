@@ -7,6 +7,10 @@ import shell.Stream;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+/**
+ * Prints arguments to output stream
+ */
 public class Echo extends Command {
 
     public static final String NAME = "echo";

@@ -6,6 +6,9 @@ import shell.Stream;
 
 import java.util.List;
 
+/**
+ * Puts new variable in context or changes variable value
+ */
 public class Eq extends Command {
 
     public Eq(List<String> args, Environment env) {

@@ -11,6 +11,9 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Reads file from parameter to stdout or reflects stdin to stdout
+ */
 public class Cat extends Command {
 
     public static final String NAME = "cat";

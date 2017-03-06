@@ -36,6 +36,7 @@ public class Token {
     }
 
     /**
+     * Static factory method
      * @return new single quote token
      */
     public static Token singleQuote() {
@@ -43,6 +44,7 @@ public class Token {
     }
 
     /**
+     * Static factory method
      * @return new double quote token
      */
     public static Token doubleQuote() {
@@ -50,6 +52,7 @@ public class Token {
     }
 
     /**
+     * Static factory method
      * @return new '=' token
      */
     public static Token eq() {
@@ -57,6 +60,7 @@ public class Token {
     }
 
     /**
+     * Static factory method
      * @return new whitespace token
      */
     public static Token whitespace() {
@@ -64,6 +68,7 @@ public class Token {
     }
 
     /**
+     * Static factory method
      * @return new pipe token
      */
     public static Token pipe() {
@@ -71,6 +76,7 @@ public class Token {
     }
 
     /**
+     * Static factory method
      * @param word
      * @return new word token
      */
@@ -79,6 +85,7 @@ public class Token {
     }
 
     /**
+     * Static factory method
      * @return new end of line token
      */
     public static Token eof() {
@@ -87,6 +94,7 @@ public class Token {
 
 
     /**
+     * Test if given char corresponds to somme delimiter token
      * @param c
      * @return tests if passed char can be a delimiter between words
      */
@@ -101,6 +109,7 @@ public class Token {
     }
 
     /**
+     * Static factory method
      * @param c
      * @return generate corresponding token to passed char
      */

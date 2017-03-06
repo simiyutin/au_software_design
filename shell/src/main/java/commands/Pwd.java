@@ -8,6 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Prints current directory
+ */
 public class Pwd extends Command {
 
     public static final String NAME = "pwd";

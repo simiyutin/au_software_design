@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ * Counts lines, words and bytes in given file or input stream
+ */
 public class Wc extends Command {
 
     public static final String NAME = "wc";

@@ -15,6 +15,7 @@ public class Environment {
     }
 
     /**
+     * Get value of variable
      * @param var name of requested variable
      * @return value of a requested variable or empty string if such does not exist in environment
      */
@@ -31,6 +32,7 @@ public class Environment {
 
 
     /**
+     * Put variable value
      * @param var name of inserted variable
      * @param val value of inserted variable
      */

@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 public class Tokenizer {
 
     /**
+     * Start tokenizer on preprocessed string
      * @param input processed string corresponding to some shell command
      * @return list of words and operators obtained from passed string
      */

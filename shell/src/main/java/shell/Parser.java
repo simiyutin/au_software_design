@@ -22,6 +22,7 @@ public class Parser {
 
 
     /**
+     * Parses list of tokens into list of commands
      * @param tokens List of tokens to parse as a chain of shell commands
      * @param env Environment object
      * @return List of generated commands

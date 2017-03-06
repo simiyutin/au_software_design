@@ -13,6 +13,7 @@ public abstract class Command {
 
 
     /**
+     * Public constructor
      * @param args arguments of a command as a List
      * @param env environment of current running shell
      */
@@ -22,6 +23,7 @@ public abstract class Command {
     }
 
     /**
+     * Used as interface to command object. Takes input stream and returns result as output stream.
      * @param stream
      * @return result data as a Stream object
      */

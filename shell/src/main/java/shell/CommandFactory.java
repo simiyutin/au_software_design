@@ -13,6 +13,7 @@ public class CommandFactory {
 
 
     /**
+     * Factory method to generate commands from tokens.
      * @param commandToken token, which contains command name as a String
      * @param args arguments of a command
      * @param env Environment object

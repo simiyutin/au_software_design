@@ -6,6 +6,7 @@ package shell;
 public class Preprocessor {
 
     /**
+     * Substitutes variables in unprocessed string
      * @param unprocessed unprocessed input String
      * @param env Environment object
      * @return String with substituted variables from environment

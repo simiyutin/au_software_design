@@ -3,9 +3,6 @@ package shell;
 import java.util.List;
 import java.util.Scanner;
 
-//todo возвращать код возврата
-//todo исключения парсера
-//прохождения нового теста токенайзера
 
 /**
  * Main entity. Reads from stdin in an infinite loop and executes commands
