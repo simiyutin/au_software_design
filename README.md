@@ -14,7 +14,7 @@
 * environment variables 
 * unknown commands are passed to system shell as separate process through Java.Process library.
 
-####Class diagram
+####Class diagram:
 ![shell class diagram](https://www.gliffy.com/go/share/image/smx5dub0j39jxied850w.png?utm_medium=live-embed&utm_source=custom)
 
 ####Data flow:
