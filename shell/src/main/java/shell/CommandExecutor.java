@@ -1,5 +1,7 @@
 package shell;
 
+import exceptions.CommandExecutionException;
+
 import java.util.List;
 
 
@@ -18,9 +20,14 @@ public class CommandExecutor {
      */
     public static Stream run(List<Command> commands) {
         Stream stream = new Stream();
-        for (Command command : commands) {
-            stream = command.run(stream);
-        }
+            try {
+                for (Command command : commands) {
+                    stream = command.run(stream);
+                }
+            } catch (CommandExecutionException e) {
+                System.out.println(e.toString());
+                return new Stream();
+            }
         return stream;
     }
 }

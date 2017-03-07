@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.CommandExecutionException;
 import shell.Command;
 import shell.Environment;
 import shell.Stream;
@@ -21,7 +22,7 @@ public class OutSource extends Command {
     }
 
     @Override
-    public Stream run(Stream stream) {
+    public Stream run(Stream stream) throws CommandExecutionException {
         String command = commandName + " " + args.stream().collect(Collectors.joining(" "));
         Stream output = new Stream();
         try {
@@ -29,17 +30,17 @@ public class OutSource extends Command {
             write(process, stream);
             output = read(process);
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            throw new CommandExecutionException("System error: " + e.toString());
         }
         return output;
     }
 
     private void write(Process process, Stream stream) throws IOException {
         Writer handle = new PrintWriter(process.getOutputStream());
-        final int LINE_FEED = 10;
+        final int lineFeed = 10;
         while (stream.hasNext()) {
             handle.write(stream.read());
-            handle.write(LINE_FEED);
+            handle.write(lineFeed);
         }
         handle.close();
     }

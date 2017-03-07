@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.CommandExecutionException;
 import shell.Command;
 import shell.Environment;
 import shell.Stream;
@@ -16,7 +17,7 @@ public class Eq extends Command {
     }
 
     @Override
-    public Stream run(Stream ignored) {
+    public Stream run(Stream ignored) throws CommandExecutionException {
         String var = args.get(0);
         String val = args.get(1);
         env.put(var, val);

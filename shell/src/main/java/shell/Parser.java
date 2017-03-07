@@ -1,5 +1,7 @@
 package shell;
 
+import exceptions.ParserException;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,24 +30,27 @@ public class Parser {
      * @return List of generated commands
      */
     public static List<Command> run(List<Token> tokens, Environment env) {
-
-        Parser parser = new Parser(tokens, env);
-        parser.start();
-        return parser.commands;
-
+        try {
+            Parser parser = new Parser(tokens, env);
+            parser.start();
+            return parser.commands;
+        } catch (ParserException e) {
+            System.out.println(e.toString());
+            return new ArrayList<>();
+        }
     }
 
-    private void start() {
+    private void start() throws ParserException {
         Token token = queue.poll();
         if (token.getType() == Token.Type.WORD) {
             parseCommand(token);
         } else {
-            error();
+            error("Expression must start with a command");
         }
 
     }
 
-    private void parseCommand(Token firstWord) {
+    private void parseCommand(Token firstWord) throws ParserException {
         Token token = queue.poll();
         switch (token.getType()) {
             case EQ:
@@ -64,17 +69,17 @@ public class Parser {
                 createCommand(firstWord, new ArrayList<>());
                 break;
             default:
-                error();
+                error("Unexpected token");
                 break;
         }
     }
 
-    private void createCommand(Token commandToken, List<String> args) {
+    private void createCommand(Token commandToken, List<String> args) throws ParserException {
         Command command = CommandFactory.produce(commandToken, args, env);
         commands.add(command);
     }
 
-    private void parseEQ(Token var) {
+    private void parseEQ(Token var) throws ParserException {
         Token val = queue.poll();
         switch (val.getType()) {
             case WORD:
@@ -85,19 +90,19 @@ public class Parser {
                 createCommand(Token.eq(), args);
                 break;
             default:
-                error();
+                error("Violated syntax of assignment operator");
                 break;
         }
     }
 
-    private void checkEQSyntax() {
+    private void checkEQSyntax() throws ParserException {
         Token token = queue.poll();
         if (token.getType() != Token.Type.EOF) {
-            error();
+            error("Violated syntax of assignment operator");
         }
     }
 
-    private void parseArg(Token command, List<String> args) {
+    private void parseArg(Token command, List<String> args) throws ParserException {
         Token token = queue.poll();
         switch (token.getType()) {
             case WORD:
@@ -112,11 +117,13 @@ public class Parser {
                 createCommand(command, args);
                 break;
             default:
-                error();
+                error("Violated syntax of argument list");
                 break;
         }
     }
 
-    private void error() {}
+    private void error(String what) throws ParserException {
+        throw new ParserException(what);
+    }
 
 }

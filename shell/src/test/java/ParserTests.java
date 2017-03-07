@@ -1,3 +1,4 @@
+import exceptions.CommandExecutionException;
 import org.junit.Test;
 import shell.*;
 
@@ -13,7 +14,11 @@ public class ParserTests {
         String input = "hello=hacked";
         List<Token> tokens = Tokenizer.run(input);
         List<Command> commands = Parser.run(tokens, env);
-        commands.get(0).run(new Stream());
+        try {
+            commands.get(0).run(new Stream());
+        } catch (CommandExecutionException e) {
+            e.printStackTrace();
+        }
         assertEquals("hacked", Preprocessor.run("$hello", env));
     }
 
@@ -23,7 +28,11 @@ public class ParserTests {
         String input = "hello='hacked = | azazazazaa'";
         List<Token> tokens = Tokenizer.run(input);
         List<Command> commands = Parser.run(tokens, env);
-        commands.get(0).run(new Stream());
+        try {
+            commands.get(0).run(new Stream());
+        } catch (CommandExecutionException e) {
+            e.printStackTrace();
+        }
         assertEquals("hacked = | azazazazaa", Preprocessor.run("$hello", env));
     }
 
@@ -34,7 +43,11 @@ public class ParserTests {
         input = Preprocessor.run(input, env);
         List<Token> tokens = Tokenizer.run(input);
         List<Command> commands = Parser.run(tokens, env);
-        commands.get(0).run(new Stream());
+        try {
+            commands.get(0).run(new Stream());
+        } catch (CommandExecutionException e) {
+            e.printStackTrace();
+        }
         assertEquals("hacked putin", Preprocessor.run("$hello", env));
     }
 
@@ -45,7 +58,11 @@ public class ParserTests {
         input = Preprocessor.run(input, env);
         List<Token> tokens = Tokenizer.run(input);
         List<Command> commands = Parser.run(tokens, env);
-        commands.get(0).run(new Stream());
+        try {
+            commands.get(0).run(new Stream());
+        } catch (CommandExecutionException e) {
+            e.printStackTrace();
+        }
         assertEquals("hacked world", Preprocessor.run("$hello", env));
     }
 

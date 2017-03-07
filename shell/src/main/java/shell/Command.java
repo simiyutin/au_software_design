@@ -1,5 +1,7 @@
 package shell;
 
+import exceptions.CommandExecutionException;
+
 import java.util.List;
 
 /**
@@ -27,5 +29,5 @@ public abstract class Command {
      * @param stream
      * @return result data as a Stream object
      */
-    public abstract Stream run(Stream stream);
+    public abstract Stream run(Stream stream) throws CommandExecutionException;
 }

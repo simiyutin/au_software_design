@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.CommandExecutionException;
 import shell.Command;
 import shell.Environment;
 import shell.Stream;
@@ -18,7 +19,7 @@ public class Exit extends Command {
     }
 
     @Override
-    public Stream run(Stream stream) {
+    public Stream run(Stream stream) throws CommandExecutionException {
         System.exit(0);
         return null;
     }

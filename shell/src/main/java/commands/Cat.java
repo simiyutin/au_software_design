@@ -1,10 +1,12 @@
 package commands;
 
+import exceptions.CommandExecutionException;
 import shell.Command;
 import shell.Environment;
 import shell.Stream;
 
 import java.io.IOException;
+import java.nio.charset.MalformedInputException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,7 +25,7 @@ public class Cat extends Command {
     }
 
     @Override
-    public Stream run(Stream stream) {
+    public Stream run(Stream stream) throws CommandExecutionException {
 
         if (stream.hasNext()) {
             return stream;
@@ -41,8 +43,10 @@ public class Cat extends Command {
             try {
                 List<String> lines = Files.readAllLines(file);
                 lines.forEach(res::write);
+            } catch (MalformedInputException e) {
+                throw new CommandExecutionException("Cannot determine file encoding");
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new CommandExecutionException("Error while reading file: " + e.toString());
             }
         }
         return res;

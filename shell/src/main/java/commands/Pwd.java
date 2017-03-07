@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.CommandExecutionException;
 import shell.Command;
 import shell.Environment;
 import shell.Stream;
@@ -20,7 +21,7 @@ public class Pwd extends Command {
     }
 
     @Override
-    public Stream run(Stream ignored) {
+    public Stream run(Stream ignored) throws CommandExecutionException {
         Path currentRelativePath = Paths.get("");
         String currentDir = currentRelativePath.toAbsolutePath().toString();
         Stream stream = new Stream();
