@@ -49,6 +49,9 @@ public class CommandFactory {
             case Pwd.NAME:
                 command = new Pwd(args, env);
                 break;
+            case Grep.NAME:
+                command = new Grep(args, env);
+                break;
             case Exit.NAME:
                 command = new Exit(args, env);
                 break;
