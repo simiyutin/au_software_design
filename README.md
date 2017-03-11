@@ -25,3 +25,19 @@ Supported features:
    * Parser: Parse list of tokens as sequence of commands divided by pipes.
    * Command Executor: Perform chained computation passing output of one comand as input to the next one.
    * Pass result to System.in and loop again.
+
+
+##2. Grep
+###Command similar to UNIX grep utility.
+
+####Supports:
+* Reading from standard input or from file.
+* Parameters:
+ * -i: case insensivity.
+ * -w: whole words search.
+ * -A %number%: Number of lines to add to output after each matched line.
+
+####Implementation:
+* For regular expressions java.util.regex package is used.
+
+* For parsing command line arguments Apache Commons CLI library was chosen, because it is pretty easy to use and fits our requirements very well. Other libraries like JCommander and args4j were considered as an option, but were rejected as a little overkill at this point. If number of arguments will grow seriously, it may be reasonable to switch to one of these libraries, because of usage of annotations for introducing parameters.
