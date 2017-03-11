@@ -1,6 +1,8 @@
+package com.simiyutin.au.shell;
+
 import org.junit.Test;
-import shell.Environment;
-import shell.Preprocessor;
+import com.simiyutin.au.shell.core.Environment;
+import com.simiyutin.au.shell.core.Preprocessor;
 
 import static org.junit.Assert.assertEquals;
 

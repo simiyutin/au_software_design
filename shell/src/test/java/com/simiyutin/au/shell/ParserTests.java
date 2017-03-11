@@ -1,6 +1,7 @@
-import exceptions.CommandExecutionException;
+package com.simiyutin.au.shell;
+
 import org.junit.Test;
-import shell.*;
+import com.simiyutin.au.shell.core.*;
 
 import java.util.List;
 

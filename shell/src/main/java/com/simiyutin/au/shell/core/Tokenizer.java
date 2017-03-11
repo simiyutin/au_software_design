@@ -1,4 +1,4 @@
-package shell;
+package com.simiyutin.au.shell.core;
 
 import java.util.ArrayList;
 import java.util.List;

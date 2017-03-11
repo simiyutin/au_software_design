@@ -1,6 +1,8 @@
+package com.simiyutin.au.shell;
+
 import org.junit.Test;
-import shell.Token;
-import shell.Tokenizer;
+import com.simiyutin.au.shell.core.Token;
+import com.simiyutin.au.shell.core.Tokenizer;
 
 import java.util.ArrayList;
 import java.util.List;

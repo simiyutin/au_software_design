@@ -1,9 +1,9 @@
-package commands;
+package com.simiyutin.au.shell.commands;
 
-import exceptions.CommandExecutionException;
-import shell.Command;
-import shell.Environment;
-import shell.Stream;
+import com.simiyutin.au.shell.core.exceptions.CommandExecutionException;
+import com.simiyutin.au.shell.core.Command;
+import com.simiyutin.au.shell.core.Environment;
+import com.simiyutin.au.shell.core.Stream;
 
 import java.io.IOException;
 import java.nio.file.Files;

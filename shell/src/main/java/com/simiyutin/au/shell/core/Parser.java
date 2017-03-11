@@ -1,6 +1,6 @@
-package shell;
+package com.simiyutin.au.shell.core;
 
-import exceptions.ParserException;
+import com.simiyutin.au.shell.core.exceptions.ParserException;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

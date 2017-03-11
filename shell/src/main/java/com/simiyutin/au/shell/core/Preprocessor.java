@@ -1,4 +1,4 @@
-package shell;
+package com.simiyutin.au.shell.core;
 
 /**
  * Takes care of substitution variable values in requested places

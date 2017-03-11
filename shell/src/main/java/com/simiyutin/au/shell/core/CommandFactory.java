@@ -1,9 +1,8 @@
-package shell;
+package com.simiyutin.au.shell.core;
 
-import commands.*;
+import com.simiyutin.au.shell.commands.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 /**
