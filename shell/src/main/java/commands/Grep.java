@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Searches in input stream or file using regular expressions.
+ */
 public class Grep extends Command {
 
     public static final String NAME = "grep";
