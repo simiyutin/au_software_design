@@ -59,9 +59,4 @@ public class CommandFactory {
         }
         return command;
     }
-
-    private static String concat(List<String> args) {
-
-        return args.stream().collect(Collectors.joining());
-    }
 }

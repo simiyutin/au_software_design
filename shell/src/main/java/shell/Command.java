@@ -26,8 +26,8 @@ public abstract class Command {
 
     /**
      * Used as interface to command object. Takes input stream and returns result as output stream.
-     * @param stream
-     * @return result data as a Stream object
+     * @param stream input data as a Stream object
+     * @return output data as a Stream object
      */
     public abstract Stream run(Stream stream) throws CommandExecutionException;
 }

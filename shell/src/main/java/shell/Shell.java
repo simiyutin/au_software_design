@@ -14,7 +14,7 @@ public class Shell {
     /**
      * constructs Shell with empty environment
      */
-    Shell() {
+    public Shell() {
         env = new Environment();
     }
 

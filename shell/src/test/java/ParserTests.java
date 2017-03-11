@@ -9,60 +9,44 @@ import static org.junit.Assert.assertEquals;
 public class ParserTests {
 
     @Test
-    public void smokeTest() {
+    public void smokeTest() throws Exception {
         Environment env = getEnv();
         String input = "hello=hacked";
         List<Token> tokens = Tokenizer.run(input);
         List<Command> commands = Parser.run(tokens, env);
-        try {
-            commands.get(0).run(new Stream());
-        } catch (CommandExecutionException e) {
-            e.printStackTrace();
-        }
+        commands.get(0).run(new Stream());
         assertEquals("hacked", Preprocessor.run("$hello", env));
     }
 
     @Test
-    public void reduceTest() {
+    public void reduceTest() throws Exception {
         Environment env = getEnv();
         String input = "hello='hacked = | azazazazaa'";
         List<Token> tokens = Tokenizer.run(input);
         List<Command> commands = Parser.run(tokens, env);
-        try {
-            commands.get(0).run(new Stream());
-        } catch (CommandExecutionException e) {
-            e.printStackTrace();
-        }
+        commands.get(0).run(new Stream());
         assertEquals("hacked = | azazazazaa", Preprocessor.run("$hello", env));
     }
 
     @Test
-    public void reduceWithSubstitutionTest() {
+    public void reduceWithSubstitutionTest() throws Exception {
         Environment env = getEnv();
         String input = "hello=\"hacked $vladimir\"";
         input = Preprocessor.run(input, env);
         List<Token> tokens = Tokenizer.run(input);
         List<Command> commands = Parser.run(tokens, env);
-        try {
-            commands.get(0).run(new Stream());
-        } catch (CommandExecutionException e) {
-            e.printStackTrace();
-        }
+        commands.get(0).run(new Stream());
         assertEquals("hacked putin", Preprocessor.run("$hello", env));
     }
 
     @Test
-    public void recursiveReduceWithSubstitutionTest() {
+    public void recursiveReduceWithSubstitutionTest() throws Exception {
         Environment env = getEnv();
         String input = "hello=\"hacked $hello\"";
         input = Preprocessor.run(input, env);
         List<Token> tokens = Tokenizer.run(input);
         List<Command> commands = Parser.run(tokens, env);
-        try {
-            commands.get(0).run(new Stream());
-        } catch (CommandExecutionException e) {
-            e.printStackTrace();
-        }
+        commands.get(0).run(new Stream());
         assertEquals("hacked world", Preprocessor.run("$hello", env));
     }
 

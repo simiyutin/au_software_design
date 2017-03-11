@@ -3,7 +3,7 @@ package shell;
 import java.util.ArrayList;
 
 /**
- * Describes possible lexems
+ * Describes possible lexemes
  */
 public class Token {
 
@@ -77,7 +77,7 @@ public class Token {
 
     /**
      * Static factory method
-     * @param word
+     * @param word string to encapsulate in newly created token
      * @return new word token
      */
     public static Token word(String word) {
@@ -94,9 +94,8 @@ public class Token {
 
 
     /**
-     * Test if given char corresponds to somme delimiter token
-     * @param c
-     * @return tests if passed char can be a delimiter between words
+     * Tests if given char corresponds to any delimiter token
+     * @param c character to test
      */
     public static boolean isDelimiter(char c) {
         ArrayList<String> test = new ArrayList<>();
@@ -110,7 +109,7 @@ public class Token {
 
     /**
      * Static factory method
-     * @param c
+     * @param c character to get corresponding token
      * @return generate corresponding token to passed char
      */
     public static Token valueOf(char c) {
