@@ -7,6 +7,8 @@ import com.simiyutin.au.shell.core.Stream;
 import com.simiyutin.au.shell.core.exceptions.CommandExecutionException;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -23,22 +25,22 @@ public class Ls extends Command{
 
     @Override
     public Stream run(Stream stream) throws CommandExecutionException {
-        File currentDir;
+        Path userDir = Paths.get(env.get("user.dir"));
         Stream outStream = new Stream();
 
-        if (args.isEmpty()) {
-            currentDir = new File(env.get("user.dir"));
-        } else {
-            String curDirName = args.get(0);
-            curDirName = curDirName.replaceFirst("^~", System.getProperty("user.home"));
-            currentDir = new File(curDirName);
+        if (!args.isEmpty()) {
+            String lsDirName = args.get(0);
+            lsDirName = lsDirName.replaceFirst("^~", System.getProperty("user.home"));
+            userDir = userDir.resolve(lsDirName);
         }
 
-        if (!currentDir.isDirectory()) {
+        File lsDir = userDir.toFile();
+
+        if (!lsDir.isDirectory()) {
             throw new CommandExecutionException("The path you specified is not a valid directory.");
         }
 
-        for (File file : currentDir.listFiles()) {
+        for (File file : lsDir.listFiles()) {
             if (!file.getName().startsWith(".")) {
                 outStream.write(file.getName());
             }
