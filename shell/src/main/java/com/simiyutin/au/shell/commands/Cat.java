@@ -39,7 +39,9 @@ public class Cat extends Command {
             }
         } else {
             String filename = args.get(0);
-            Path file = Paths.get(filename);
+            Path userDir = Paths.get(env.get("user.dir"));
+
+            Path file = userDir.resolve(filename);
             try {
                 List<String> lines = Files.readAllLines(file);
                 lines.forEach(res::write);

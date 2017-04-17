@@ -22,8 +22,7 @@ public class Pwd extends Command {
 
     @Override
     public Stream run(Stream ignored) throws CommandExecutionException {
-        Path currentRelativePath = Paths.get("");
-        String currentDir = currentRelativePath.toAbsolutePath().toString();
+        String currentDir = env.get("user.dir");
         Stream stream = new Stream();
         stream.write(currentDir);
         return stream;

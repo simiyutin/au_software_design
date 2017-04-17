@@ -16,6 +16,7 @@ public class Shell {
      */
     public Shell() {
         env = new Environment();
+        env.put("user.dir", System.getProperty("user.dir"));
     }
 
     /**

@@ -51,6 +51,12 @@ public class CommandFactory {
             case Exit.NAME:
                 command = new Exit(args, env);
                 break;
+            case Ls.NAME:
+                command = new Ls(args, env);
+                break;
+            case Cd.NAME:
+                command = new Cd(args, env);
+                break;
             default:
                 command = new OutSource(commandName, args, env);
                 break;

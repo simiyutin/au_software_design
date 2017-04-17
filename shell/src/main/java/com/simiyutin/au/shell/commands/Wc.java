@@ -40,7 +40,8 @@ public class Wc extends Command {
 
     private Stream handleFile() {
         String fileName = args.get(0);
-        Path file = Paths.get(fileName);
+        Path userDir = Paths.get(env.get("user.dir"));
+        Path file = userDir.resolve(fileName);
         try {
             List<String> lines = Files.readAllLines(file);
             return parseLines(lines);
