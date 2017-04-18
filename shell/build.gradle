@@ -2,11 +2,17 @@ group 'simiyutin'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = "com.simiyutin.au.shell.core.Main"
 
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+run{
+    standardInput = System.in
 }
 
 dependencies {
