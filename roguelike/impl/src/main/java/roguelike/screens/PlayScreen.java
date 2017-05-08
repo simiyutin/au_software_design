@@ -5,6 +5,7 @@ import roguelike.models.WorldBuilder;
 import roguelike.models.World;
 
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
@@ -29,6 +30,7 @@ public class PlayScreen implements Screen {
         int left = scrollLeft();
         int top = scrollTop();
         displayWorld(terminal, left, top);
+        displayPlayer(terminal);
     }
 
     private int scrollLeft() {
@@ -60,6 +62,10 @@ public class PlayScreen implements Screen {
                 break;
         }
         return this;
+    }
+
+    public void displayPlayer(AsciiPanel terminal) {
+        terminal.write('X', centerX - scrollLeft(), centerY - scrollTop(), Color.BLUE);
     }
 
     public void displayWorld(AsciiPanel terminal, int left, int top) {
