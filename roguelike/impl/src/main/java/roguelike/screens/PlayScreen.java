@@ -1,7 +1,7 @@
 package roguelike.screens;
 
 import asciiPanel.AsciiPanel;
-import roguelike.WorldFactory;
+import roguelike.models.WorldBuilder;
 import roguelike.models.World;
 
 
@@ -20,7 +20,7 @@ public class PlayScreen implements Screen {
 
     public PlayScreen() {
 
-        world = WorldFactory.getWorld();
+        world = new WorldBuilder(100, 100).makeCaves().build();
         centerX = world.getWidth() / 2;
         centerY = world.getHeight() / 2;
     }
@@ -48,6 +48,15 @@ public class PlayScreen implements Screen {
         switch (key.getKeyCode()) {
             case KeyEvent.VK_S:
                 scrollBy(0, 1);
+                break;
+            case KeyEvent.VK_W:
+                scrollBy(0, -1);
+                break;
+            case KeyEvent.VK_A:
+                scrollBy(-1, 0);
+                break;
+            case KeyEvent.VK_D:
+                scrollBy(1, 0);
                 break;
         }
         return this;

@@ -12,12 +12,12 @@ public class World {
 
     public World(Tile[][] tiles) {
         this.tiles = tiles;
-        this.height = tiles.length;
-        this.width = tiles[0].length;
+        this.width = tiles.length;
+        this.height = tiles[0].length;
     }
 
     public Tile getTile(int x, int y) {
-        return tiles[y][x];
+        return tiles[x][y];
     }
 
     public char getGlyph(int x, int y) {
