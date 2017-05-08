@@ -1,26 +1,27 @@
+package roguelike;
+
 import asciiPanel.AsciiPanel;
-import io.Screen;
-import io.StartScreen;
+import roguelike.screens.Screen;
+import roguelike.screens.StartScreen;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-/**
- * Created by boris on 08.05.17.
- */
+
 public class Scheduler extends JFrame implements KeyListener {
-    private int framerate;
     private AsciiPanel terminal;
     private Screen screen;
 
-    public Scheduler(int framerate) {
+    public Scheduler() {
         super();
-        this.framerate = framerate;
+
         this.terminal = new AsciiPanel();
         add(terminal);
         pack();
+
         this.screen = new StartScreen();
+
         addKeyListener(this);
         repaint();
     }
