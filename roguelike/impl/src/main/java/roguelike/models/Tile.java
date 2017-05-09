@@ -27,4 +27,12 @@ public enum Tile {
     public Color getColor() {
         return color;
     }
+
+    public boolean isWalkable() {
+        return this == FLOOR;
+    }
+
+    public boolean isDiggable() {
+        return this == WALL;
+    }
 }

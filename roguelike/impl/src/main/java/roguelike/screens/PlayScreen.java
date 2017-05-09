@@ -1,6 +1,7 @@
 package roguelike.screens;
 
 import asciiPanel.AsciiPanel;
+import roguelike.models.Player;
 import roguelike.models.WorldBuilder;
 import roguelike.models.World;
 
@@ -14,58 +15,55 @@ import java.awt.event.KeyEvent;
 public class PlayScreen implements Screen {
 
     private World world;
-    private int centerX;
-    private int centerY;
+    private Player player;
     private int screenWidth = 80;
     private int screenHeight = 23;
 
     public PlayScreen() {
 
         world = new WorldBuilder(100, 100).makeCaves().build();
-        centerX = world.getWidth() / 2;
-        centerY = world.getHeight() / 2;
+        player = world.getPlayer();
     }
 
     public void display(AsciiPanel terminal) {
         int left = scrollLeft();
         int top = scrollTop();
         displayWorld(terminal, left, top);
-        displayPlayer(terminal);
+        displayPlayer(terminal, left, top);
     }
 
     private int scrollLeft() {
-        return Math.max(0, Math.min(centerX - screenWidth / 2, world.getWidth() - screenWidth));
+        return Math.max(0, Math.min(player.x - screenWidth / 2, world.getWidth() - screenWidth));
     }
 
     private int scrollTop() {
-        return Math.max(0, Math.min(centerY - screenHeight / 2, world.getHeight() - screenHeight));
-    }
-
-    private void scrollBy(int dx, int dy) {
-        centerX = Math.max(0, Math.min(centerX + dx, world.getWidth() - 1));
-        centerY = Math.max(0, Math.min(centerY + dy, world.getHeight() - 1));
+        return Math.max(0, Math.min(player.y - screenHeight / 2, world.getHeight() - screenHeight));
     }
 
     public Screen respondToUserInput(KeyEvent key) {
         switch (key.getKeyCode()) {
             case KeyEvent.VK_S:
-                scrollBy(0, 1);
+                player.move(0, 1);
                 break;
             case KeyEvent.VK_W:
-                scrollBy(0, -1);
+                player.move(0, -1);
                 break;
             case KeyEvent.VK_A:
-                scrollBy(-1, 0);
+                player.move(-1, 0);
                 break;
             case KeyEvent.VK_D:
-                scrollBy(1, 0);
+                player.move(1, 0);
+                break;
+            case KeyEvent.VK_F:
+                player.dig();
                 break;
         }
         return this;
     }
 
-    public void displayPlayer(AsciiPanel terminal) {
-        terminal.write('X', centerX - scrollLeft(), centerY - scrollTop(), Color.BLUE);
+    public void displayPlayer(AsciiPanel terminal, int left, int top) {
+        Player p = world.getPlayer();
+        terminal.write(p.getGlyph(), p.x - left, p.y - top, p.getColor());
     }
 
     public void displayWorld(AsciiPanel terminal, int left, int top) {
