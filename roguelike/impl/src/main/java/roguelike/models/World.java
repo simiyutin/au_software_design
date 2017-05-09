@@ -20,8 +20,9 @@ public class World {
         this.width = tiles.length;
         this.height = tiles[0].length;
 
-        this.player = new Player(this);
         this.mobs = new ArrayList<>();
+        this.player = new Player(this);
+        this.mobs.add(this.player);
     }
 
     public Tile getTile(int x, int y) {

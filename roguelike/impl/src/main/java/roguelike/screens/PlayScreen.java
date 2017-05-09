@@ -1,9 +1,7 @@
 package roguelike.screens;
 
 import asciiPanel.AsciiPanel;
-import roguelike.models.Player;
-import roguelike.models.WorldBuilder;
-import roguelike.models.World;
+import roguelike.models.*;
 
 
 import java.awt.*;
@@ -21,7 +19,11 @@ public class PlayScreen implements Screen {
 
     public PlayScreen() {
 
-        world = new WorldBuilder(100, 100).makeCaves().build();
+        world = new WorldBuilder(100, 100)
+                .makeCaves()
+                .addMobs(Mushroom.class, 10)
+                .build();
+
         player = world.getPlayer();
     }
 
@@ -29,7 +31,7 @@ public class PlayScreen implements Screen {
         int left = scrollLeft();
         int top = scrollTop();
         displayWorld(terminal, left, top);
-        displayPlayer(terminal, left, top);
+        displayMobs(terminal, left, top);
     }
 
     private int scrollLeft() {
@@ -61,9 +63,18 @@ public class PlayScreen implements Screen {
         return this;
     }
 
-    public void displayPlayer(AsciiPanel terminal, int left, int top) {
-        Player p = world.getPlayer();
-        terminal.write(p.getGlyph(), p.x - left, p.y - top, p.getColor());
+    public void displayMobs(AsciiPanel terminal, int left, int top) {
+
+        for (Being b: world.getMobs()) {
+            writeSafe(terminal, b.getGlyph(), b.x - left, b.y - top, b.getColor());
+        }
+
+    }
+
+    private void writeSafe(AsciiPanel terminal, char c, int x, int y, Color color) {
+        if (x > 0 && x < screenWidth && y > 0 && y < screenHeight) {
+            terminal.write(c, x, y, color);
+        }
     }
 
     public void displayWorld(AsciiPanel terminal, int left, int top) {

@@ -18,7 +18,7 @@ public abstract class Being {
     protected Color color;
     protected World world;
 
-    Being(World world) {
+    public Being(World world) {
         this.world = world;
 
         Random randomGen = new Random(42);
@@ -28,7 +28,7 @@ public abstract class Being {
             x = randomGen.nextInt(world.getWidth());
             y = randomGen.nextInt(world.getHeight());
 
-        } while (world.getTile(x, y) != Tile.FLOOR);
+        } while (world.getTile(x, y) != Tile.FLOOR || world.getMobs().stream().anyMatch(b -> b.x == x && b.y == y));
     }
 
     public char getGlyph() {
