@@ -17,9 +17,11 @@ public abstract class Being {
     protected char glyph;
     protected Color color;
     protected World world;
+    protected int health;
 
     public Being(World world) {
         this.world = world;
+        this.health = 100;
 
         Random randomGen = new Random(42);
 
@@ -39,6 +41,10 @@ public abstract class Being {
         return color;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
     public void move(int dx, int dy) {
         xDirection = Math.max(0, Math.min(x + dx, world.getWidth() - 1));
         yDirection  = Math.max(0, Math.min(y + dy, world.getHeight() - 1));
@@ -46,6 +52,8 @@ public abstract class Being {
             x = xDirection;
             y = yDirection;
         }
+
+        respondToMove();
     }
 
     public void dig() {
@@ -53,4 +61,6 @@ public abstract class Being {
             world.setTile(xDirection, yDirection, Tile.FLOOR);
         }
     }
+
+    protected void respondToMove() {}
 }

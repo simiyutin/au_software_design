@@ -15,7 +15,7 @@ public class PlayScreen implements Screen {
     private World world;
     private Player player;
     private int screenWidth = 80;
-    private int screenHeight = 23;
+    private int screenHeight = 24;
 
     public PlayScreen() {
 
@@ -32,6 +32,7 @@ public class PlayScreen implements Screen {
         int top = scrollTop();
         displayWorld(terminal, left, top);
         displayMobs(terminal, left, top);
+        displayHealth(terminal);
     }
 
     private int scrollLeft() {
@@ -60,7 +61,7 @@ public class PlayScreen implements Screen {
                 player.dig();
                 break;
         }
-        return this;
+        return player.getHealth() > 0 ? this : new DeadScreen();
     }
 
     public void displayMobs(AsciiPanel terminal, int left, int top) {
@@ -75,6 +76,10 @@ public class PlayScreen implements Screen {
         if (x > 0 && x < screenWidth && y > 0 && y < screenHeight) {
             terminal.write(c, x, y, color);
         }
+    }
+
+    public void displayHealth(AsciiPanel terminal) {
+        terminal.write(String.format("health: %s", player.getHealth()), 67, 1);
     }
 
     public void displayWorld(AsciiPanel terminal, int left, int top) {

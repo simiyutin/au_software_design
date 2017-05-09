@@ -13,4 +13,9 @@ public class Player extends Being {
         this.glyph = 'X';
         this.color = Color.BLUE;
     }
+
+    @Override
+    protected void respondToMove() {
+        health -= world.getTile(x, y).getHarmness();
+    }
 }

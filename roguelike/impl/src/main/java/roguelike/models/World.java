@@ -26,6 +26,9 @@ public class World {
     }
 
     public Tile getTile(int x, int y) {
+        if (x < 0 || x > width - 1 || y < 0 || y > height - 1) {
+            return Tile.BOUNDS;
+        }
         return tiles[x][y];
     }
 
