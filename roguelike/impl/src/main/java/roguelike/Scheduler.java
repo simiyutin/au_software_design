@@ -31,21 +31,23 @@ public class Scheduler extends JFrame implements KeyListener {
         task = new RecurringTask(this::repaint, 10);
     }
 
-    public void schedule(Game game) {
-
+    public void schedule() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
+    @Override
     public void keyTyped(KeyEvent e) {
 
     }
 
+    @Override
     public void keyPressed(KeyEvent e) {
         screen = screen.respondToUserInput(e);
         repaint();
     }
 
+    @Override
     public void keyReleased(KeyEvent e) {
 
     }

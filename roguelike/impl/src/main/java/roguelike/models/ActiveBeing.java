@@ -27,7 +27,7 @@ public abstract class ActiveBeing extends Being {
             y = yDirection;
         }
 
-        getEnvironmentEffects();
+        interactWithEnvironment();
     }
 
     public void act() {
@@ -36,5 +36,5 @@ public abstract class ActiveBeing extends Being {
         }
     }
 
-    protected abstract void getEnvironmentEffects();
+    protected abstract void interactWithEnvironment();
 }

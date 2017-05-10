@@ -5,8 +5,7 @@ package roguelike;
  */
 public class Main {
     public static void main(String[] args) {
-        Game game = new Game();
         Scheduler scheduler = new Scheduler();
-        scheduler.schedule(game);
+        scheduler.schedule();
     }
 }

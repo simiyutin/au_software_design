@@ -15,7 +15,7 @@ public class Player extends ActiveBeing {
     }
 
     @Override
-    protected void getEnvironmentEffects() {
+    protected void interactWithEnvironment() {
         int deltaHealth = world.getTile(x, y).getDeltaHealth();
         health += deltaHealth;
     }
