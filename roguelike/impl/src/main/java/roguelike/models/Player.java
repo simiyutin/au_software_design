@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Created by boris on 09.05.17.
  */
-public class Player extends Being {
+public class Player extends ActiveBeing {
 
     public Player(World world) {
         super(world);
@@ -15,7 +15,8 @@ public class Player extends Being {
     }
 
     @Override
-    protected void respondToMove() {
-        health -= world.getTile(x, y).getHarmness();
+    protected void getEnvironmentEffects() {
+        int deltaHealth = world.getTile(x, y).getDeltaHealth();
+        health += deltaHealth;
     }
 }

@@ -11,7 +11,7 @@ public interface Screen {
     void display(AsciiPanel terminal);
     Screen respondToUserInput(KeyEvent key);
     default void print(AsciiPanel terminal, String str) {
-        final int onHeight = 22;
+        final int onHeight = 18;
         terminal.writeCenter(str, onHeight);
     }
 }

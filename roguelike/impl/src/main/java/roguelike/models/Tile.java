@@ -9,18 +9,18 @@ import java.awt.*;
  */
 public enum Tile {
     FLOOR('.', AsciiPanel.yellow, 0),
-    POISONED_FLOOR('.', Color.GREEN, 5),
+    POISONED_FLOOR('.', Color.GREEN, -5),
     WALL('#', AsciiPanel.yellow, 0),
     BOUNDS('x', AsciiPanel.brightBlack, 0);
 
     private char glyph;
     private Color color;
-    private int harmness;
+    private int deltaHealth;
 
-    Tile(char glyph, Color color, int harmness) {
+    Tile(char glyph, Color color, int deltaHealth) {
         this.glyph = glyph;
         this.color = color;
-        this.harmness = harmness;
+        this.deltaHealth = deltaHealth;
     }
 
     public char getGlyph() {
@@ -31,8 +31,8 @@ public enum Tile {
         return color;
     }
 
-    public int getHarmness() {
-        return harmness;
+    public int getDeltaHealth() {
+        return deltaHealth;
     }
 
     public boolean isWalkable() {

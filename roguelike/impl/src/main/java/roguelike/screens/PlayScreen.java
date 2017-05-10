@@ -22,6 +22,7 @@ public class PlayScreen implements Screen {
         world = new WorldBuilder(100, 100)
                 .makeCaves()
                 .addMobs(Mushroom.class, 10)
+                .addMobs(Ghost.class, 10)
                 .build();
 
         player = world.getPlayer();
@@ -57,8 +58,8 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_D:
                 player.move(1, 0);
                 break;
-            case KeyEvent.VK_F:
-                player.dig();
+            case KeyEvent.VK_ENTER:
+                player.act();
                 break;
         }
         return player.getHealth() > 0 ? this : new DeadScreen();

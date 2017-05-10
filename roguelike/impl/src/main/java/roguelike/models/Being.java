@@ -11,17 +11,13 @@ import java.util.Random;
 public abstract class Being {
     public int x;
     public int y;
-    private int xDirection;
-    private int yDirection;
 
     protected char glyph;
     protected Color color;
     protected World world;
-    protected int health;
 
     public Being(World world) {
         this.world = world;
-        this.health = 100;
 
         Random randomGen = new Random(42);
 
@@ -41,26 +37,5 @@ public abstract class Being {
         return color;
     }
 
-    public int getHealth() {
-        return health;
-    }
 
-    public void move(int dx, int dy) {
-        xDirection = Math.max(0, Math.min(x + dx, world.getWidth() - 1));
-        yDirection  = Math.max(0, Math.min(y + dy, world.getHeight() - 1));
-        if (world.getTile(xDirection, yDirection).isWalkable()) {
-            x = xDirection;
-            y = yDirection;
-        }
-
-        respondToMove();
-    }
-
-    public void dig() {
-        if (world.getTile(xDirection, yDirection).isDiggable()) {
-            world.setTile(xDirection, yDirection, Tile.FLOOR);
-        }
-    }
-
-    protected void respondToMove() {}
 }

@@ -5,13 +5,16 @@ import roguelike.screens.Screen;
 import roguelike.screens.StartScreen;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.*;
 
 
 public class Scheduler extends JFrame implements KeyListener {
     private AsciiPanel terminal;
     private Screen screen;
+    private RecurringTask task;
 
     public Scheduler() {
         super();
@@ -23,7 +26,9 @@ public class Scheduler extends JFrame implements KeyListener {
         this.screen = new StartScreen();
 
         addKeyListener(this);
-        repaint();
+
+
+        task = new RecurringTask(this::repaint, 10);
     }
 
     public void schedule(Game game) {
