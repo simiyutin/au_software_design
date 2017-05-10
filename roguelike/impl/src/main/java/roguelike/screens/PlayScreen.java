@@ -45,7 +45,7 @@ public class PlayScreen implements Screen {
     }
 
     public Screen respondToUserInput(KeyEvent key) {
-        switch (key.getKeyCode()) {
+        switch (player.getEffect().apply(key.getKeyCode())) {
             case KeyEvent.VK_S:
                 player.move(0, 1);
                 break;

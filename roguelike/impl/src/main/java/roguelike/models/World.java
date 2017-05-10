@@ -59,4 +59,13 @@ public class World {
     public List<Being> getMobs() {
         return mobs;
     }
+
+    public Being getMob(int x, int y) {
+        for (Being b : mobs) {
+            if (b.x == x && b.y == y) {
+                return b;
+            }
+        }
+        return null;
+    }
 }
