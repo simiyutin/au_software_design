@@ -5,6 +5,7 @@ import roguelike.DelayedTask;
 import roguelike.models.beings.Being;
 import roguelike.models.beings.Player;
 import roguelike.models.items.LootItem;
+import roguelike.models.items.Weapon;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -86,6 +87,15 @@ public class World {
 
     public Being getMob(int x, int y) {
         for (Being b : mobs) {
+            if (b.x == x && b.y == y) {
+                return b;
+            }
+        }
+        return null;
+    }
+
+    public LootItem getWeapon(int x, int y) {
+        for (LootItem b : loot) {
             if (b.x == x && b.y == y) {
                 return b;
             }

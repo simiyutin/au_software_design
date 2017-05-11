@@ -8,17 +8,23 @@ import java.util.Random;
  * Created by boris on 11.05.17.
  */
 public enum WeaponType {
-    HAND('h', 1, 10),
-    SWORD('>', 10, 150);
+    HAND('h', "hand", 1, 10),
+    SWORD('>', "sword", 10, 150);
 
     private char glyph;
     private int  hue;
     private int harm;
+    private String name;
 
-    WeaponType(char glyph, int harm, int hue) {
+    WeaponType(char glyph, String name, int harm, int hue) {
         this.glyph = glyph;
+        this.name = name;
         this.harm = harm;
         this.hue = hue;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public char getGlyph() {

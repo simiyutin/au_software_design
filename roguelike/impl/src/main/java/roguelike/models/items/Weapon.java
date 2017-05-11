@@ -20,6 +20,10 @@ public class Weapon {
         return Color.getHSBColor(type.getHue(), 200, brightness);
     }
 
+    public String getName() { // todo handle level name correlation
+        return type.getName() + String.format(" of level %d", level);
+    }
+
     public char getGlyph() {
         return type.getGlyph();
     }
