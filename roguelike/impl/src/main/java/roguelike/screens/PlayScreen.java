@@ -3,8 +3,8 @@ package roguelike.screens;
 import asciiPanel.AsciiPanel;
 import roguelike.models.*;
 import roguelike.models.beings.*;
-import roguelike.models.items.LootItem;
-import roguelike.models.items.Weapon;
+import roguelike.models.items.Item;
+import roguelike.models.items.ThrownItem;
 
 
 import java.awt.*;
@@ -27,7 +27,8 @@ public class PlayScreen implements Screen {
                 .addMobs(Mushroom.class, 10)
                 .addMobs(Ghost.class, 0)
                 .addMobs(Dragon.class, 100)
-                .addLoot(15)
+                .addWeapons(15)
+                .addMedAids(10)
                 .build();
 
         player = world.getPlayer();
@@ -110,9 +111,9 @@ public class PlayScreen implements Screen {
     }
 
     public void displayLoot(AsciiPanel terminal, int left, int top) {
-        for (LootItem b: world.getLoot()) {
-            Weapon w = b.getWeapon();
-            writeSafe(terminal, w.getGlyph(), b.x - left, b.y - top, w.getColor());
+        for (ThrownItem b: world.getLoot()) {
+            Item item = b.getItem();
+            writeSafe(terminal, item.getGlyph(), b.x - left, b.y - top, item.getColor());
         }
     }
 

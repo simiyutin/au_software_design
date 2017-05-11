@@ -4,11 +4,7 @@ import roguelike.DelayedTask;
 import roguelike.RecurringTask;
 import roguelike.models.Tile;
 import roguelike.models.actions.Action;
-import roguelike.models.actions.Battle;
-import roguelike.models.actions.DragonBattle;
-import roguelike.models.items.LootItem;
-import roguelike.models.items.Weapon;
-import roguelike.models.items.WeaponType;
+import roguelike.models.items.*;
 import roguelike.models.World;
 
 import java.awt.*;
@@ -35,11 +31,17 @@ public class Player extends ActiveBeing {
         int deltaHealth = world.getTile(x, y).getDeltaHealth();
         health += deltaHealth;
 
-        LootItem lootItem = world.getWeapon(x, y);
-        if (lootItem != null) {
-            weapon = lootItem.getWeapon();
+        ThrownItem thrownItem = world.getItem(x, y);
+        if (thrownItem != null) {
+            Item item = thrownItem.getItem();
+            if (item instanceof Weapon) {
+                weapon = (Weapon) item;
+            } else if (item instanceof MedAid) {
+                health += ((MedAid) item).getValue();
+                health = Math.min(health, 100);
+            }
             world.setMessage(String.format("picked %s", weapon.getName()));
-            world.getLoot().remove(lootItem);
+            world.getLoot().remove(thrownItem);
         }
 
         Being being = getMobNearMe();

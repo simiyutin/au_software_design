@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Created by boris on 11.05.17.
  */
-public class Weapon {
+public class Weapon implements Item {
     private WeaponType type;
     private final int MAX_LEVEL = 10;
     private int level; // 1 - 10

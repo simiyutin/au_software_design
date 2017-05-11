@@ -2,11 +2,9 @@ package roguelike.models;
 
 
 import roguelike.DelayedTask;
-import roguelike.models.actions.Battle;
 import roguelike.models.beings.Being;
 import roguelike.models.beings.Player;
-import roguelike.models.items.LootItem;
-import roguelike.models.items.Weapon;
+import roguelike.models.items.ThrownItem;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -23,9 +21,9 @@ public class World {
     private Player player;
     private List<Being> mobs;
     private String message = "";
-    private List<LootItem> loot;
+    private List<ThrownItem> loot;
 
-    public List<LootItem> getLoot() {
+    public List<ThrownItem> getLoot() {
         return loot;
     }
 
@@ -34,7 +32,6 @@ public class World {
     }
 
     public void setMessage(String message) {
-        //todo timeoutTask;
         this.message = message;
         new DelayedTask(() -> {
             if (this.message.equals(message)) {
@@ -99,8 +96,8 @@ public class World {
         return null;
     }
 
-    public LootItem getWeapon(int x, int y) {
-        for (LootItem b : loot) {
+    public ThrownItem getItem(int x, int y) {
+        for (ThrownItem b : loot) {
             if (b.x == x && b.y == y) {
                 return b;
             }

@@ -1,7 +1,9 @@
 package roguelike.models;
 
 import roguelike.models.beings.Being;
-import roguelike.models.items.LootItem;
+import roguelike.models.items.Item;
+import roguelike.models.items.MedAid;
+import roguelike.models.items.ThrownItem;
 import roguelike.models.items.Weapon;
 
 import java.lang.reflect.Constructor;
@@ -19,7 +21,7 @@ public class WorldBuilder {
     private int height;
     private Tile[][] tiles;
     private List<Constructor<? extends Being>> mobs;
-    private List<Weapon> loot;
+    private List<Item> loot;
 
     public WorldBuilder(int width, int height) {
         this.width = width;
@@ -39,8 +41,8 @@ public class WorldBuilder {
             }
         }
 
-        for (Weapon w : loot) {
-            world.getLoot().add(new LootItem(w, world)); //todo circular dependency
+        for (Item w : loot) {
+            world.getLoot().add(new ThrownItem(w, world)); //todo circular dependency
         }
 
         return world;
@@ -63,13 +65,22 @@ public class WorldBuilder {
         return this;
     }
 
-    public WorldBuilder addLoot(int quantity) {
+    public WorldBuilder addWeapons(int quantity) {
         Random randGen = new Random();
         final int maxLevel = 2;
         for (int i = 0; i < quantity; i++) {
             Weapon weapon = Weapon.getRandomOfLevel(randGen.nextInt(maxLevel + 1));
             loot.add(weapon);
         }
+        return this;
+    }
+
+    public WorldBuilder addMedAids(int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            MedAid medAid = new MedAid();
+            loot.add(medAid);
+        }
+
         return this;
     }
 
