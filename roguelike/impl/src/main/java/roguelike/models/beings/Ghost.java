@@ -23,7 +23,7 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
         this.glyph = 'G';
         this.color = Color.cyan;
 
-        new RecurringTask(this::move, 100);
+        new RecurringTask(this::move, 200);
     }
 
     @Override

@@ -25,8 +25,8 @@ public class PlayScreen implements Screen {
         world = new WorldBuilder(100, 100)
                 .makeCaves()
                 .addMobs(Mushroom.class, 10)
-                .addMobs(Ghost.class, 0)
-                .addMobs(Dragon.class, 100)
+                .addMobs(Ghost.class, 5)
+                .addMobs(Dragon.class, 15)
                 .addWeapons(15)
                 .addMedAids(10)
                 .build();

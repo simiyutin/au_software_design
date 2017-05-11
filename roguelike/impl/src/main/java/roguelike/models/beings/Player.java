@@ -40,7 +40,7 @@ public class Player extends ActiveBeing {
                 health += ((MedAid) item).getValue();
                 health = Math.min(health, 100);
             }
-            world.setMessage(String.format("picked %s", weapon.getName()));
+            world.setMessage(String.format("picked %s", item.getName()));
             world.getLoot().remove(thrownItem);
         }
 
@@ -111,7 +111,7 @@ public class Player extends ActiveBeing {
             int harm = level * weapon.getLevel();
             int health = enemy.getHealth();
             enemy.setHealth(health - harm);
-            world.setMessage(String.format("enemy heath: %d", enemy.getHealth()));
+            world.setMessage(String.format("enemy health: %d", enemy.getHealth()));
             if (enemy.getHealth() < 0) {
                 world.setMessage("You won!");
                 weapon = Weapon.getRandomOfLevel(enemy.getLevel() + 2);
