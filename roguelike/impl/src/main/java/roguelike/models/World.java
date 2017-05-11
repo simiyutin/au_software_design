@@ -2,6 +2,7 @@ package roguelike.models;
 
 
 import roguelike.DelayedTask;
+import roguelike.models.actions.Battle;
 import roguelike.models.beings.Being;
 import roguelike.models.beings.Player;
 import roguelike.models.items.LootItem;
@@ -35,7 +36,11 @@ public class World {
     public void setMessage(String message) {
         //todo timeoutTask;
         this.message = message;
-        new DelayedTask(() -> this.message = "", 1000);
+        new DelayedTask(() -> {
+            if (this.message.equals(message)) {
+                this.message = "";
+            }
+        }, 1000);
     }
 
     public World(Tile[][] tiles) {

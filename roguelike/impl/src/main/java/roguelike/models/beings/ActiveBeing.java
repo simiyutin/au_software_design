@@ -1,6 +1,5 @@
 package roguelike.models.beings;
 
-import roguelike.models.Tile;
 import roguelike.models.World;
 
 import java.util.Random;
@@ -14,21 +13,54 @@ public abstract class ActiveBeing extends Being {
     protected int yDirection;
 
     protected int health;
+    protected int level;
+    protected boolean immobilized;
 
+    protected boolean alive;
 
-    private PlayerEffects effect;
+    private SideEffect effect;
 
     public ActiveBeing(World world) {
         super(world);
         this.health = 100;
-        this.effect = PlayerEffects.IDENTITY;
+        this.effect = SideEffect.IDENTITY;
+        this.level = 1;
+        this.immobilized = false;
+        this.alive = true;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
+    public boolean isImmobilized() {
+        return immobilized;
+    }
+
+    public void setImmobilized(boolean immobilized) {
+        this.immobilized = immobilized;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public int getHealth() {
         return health;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     public void move(int dx, int dy) {
+        if (immobilized) {
+            return;
+        }
         xDirection = Math.max(0, Math.min(x + dx, world.getWidth() - 1));
         yDirection  = Math.max(0, Math.min(y + dy, world.getHeight() - 1));
         if (canMove(xDirection, yDirection)) {
@@ -43,17 +75,11 @@ public abstract class ActiveBeing extends Being {
         return world.getTile(xTo, yTo).isWalkable() && world.getMob(xTo, yTo) == null;
     }
 
-    public void act() {
-        if (world.getTile(xDirection, yDirection).isDiggable()) {
-            world.setTile(xDirection, yDirection, Tile.FLOOR);
-        }
-    }
-
-    public void setEffect(PlayerEffects effect) {
+    public void setEffect(SideEffect effect) {
         this.effect = effect;
     }
 
-    public PlayerEffects getEffect() {
+    public SideEffect getEffect() {
         return effect;
     }
 

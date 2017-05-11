@@ -4,10 +4,9 @@ import roguelike.RecurringTask;
 import roguelike.models.World;
 
 import java.awt.*;
-import java.util.Random;
 
-import static roguelike.models.beings.PlayerEffects.IDENTITY;
-import static roguelike.models.beings.PlayerEffects.INVERSED;
+import static roguelike.models.beings.SideEffect.IDENTITY;
+import static roguelike.models.beings.SideEffect.INVERSED;
 
 /**
  * Created by boris on 10.05.17.
@@ -17,7 +16,6 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
     private static boolean moveTo = true;
 
     private final int SMELL_RANGE = 15;
-    private boolean alive = true;
 
     public Ghost(World world) {
         super(world);
@@ -31,7 +29,7 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
     @Override
     protected void interactWithEnvironment() {
         if (distToPlayer(x, y) < 3) {
-            PlayerEffects effect = world.getPlayer().getEffect();
+            SideEffect effect = world.getPlayer().getEffect();
             if (effect == INVERSED) {
                 world.getMobs().remove(this);
                 world.getPlayer().setEffect(IDENTITY);

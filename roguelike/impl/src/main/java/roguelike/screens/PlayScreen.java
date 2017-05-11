@@ -25,14 +25,15 @@ public class PlayScreen implements Screen {
         world = new WorldBuilder(100, 100)
                 .makeCaves()
                 .addMobs(Mushroom.class, 10)
-                .addMobs(Ghost.class, 10)
-                .addMobs(Dragon.class, 2)
+                .addMobs(Ghost.class, 0)
+                .addMobs(Dragon.class, 100)
                 .addLoot(15)
                 .build();
 
         player = world.getPlayer();
     }
 
+    @Override
     public void display(AsciiPanel terminal) {
         int left = scrollLeft();
         int top = scrollTop();
@@ -51,6 +52,7 @@ public class PlayScreen implements Screen {
         return Math.max(0, Math.min(player.y - screenHeight / 2, world.getHeight() - screenHeight));
     }
 
+    @Override
     public Screen respondToUserInput(KeyEvent key) {
         switch (player.getEffect().apply(key.getKeyCode())) {
             case KeyEvent.VK_S:
@@ -69,6 +71,11 @@ public class PlayScreen implements Screen {
                 player.act();
                 break;
         }
+        return updateState();
+    }
+
+    @Override
+    public Screen updateState() {
         return player.getHealth() > 0 ? this : new DeadScreen();
     }
 

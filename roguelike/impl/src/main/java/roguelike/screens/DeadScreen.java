@@ -18,4 +18,9 @@ public class DeadScreen implements Screen {
     public Screen respondToUserInput(KeyEvent key) {
         return this;
     }
+
+    @Override
+    public Screen updateState() {
+        return this;
+    }
 }

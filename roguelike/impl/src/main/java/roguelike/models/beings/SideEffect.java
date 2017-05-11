@@ -6,9 +6,11 @@ import java.util.function.Function;
 /**
  * Created by boris on 10.05.17.
  */
-public enum PlayerEffects {
+public enum SideEffect {
 
     IDENTITY(Function.identity()),
+
+    IMMOBILIZED(key -> 0),
 
     INVERSED(key -> {
         switch (key) {
@@ -27,7 +29,7 @@ public enum PlayerEffects {
 
     private Function<Integer, Integer> proxy;
 
-    PlayerEffects(Function<Integer, Integer> proxy) {
+    SideEffect(Function<Integer, Integer> proxy) {
         this.proxy = proxy;
     }
 

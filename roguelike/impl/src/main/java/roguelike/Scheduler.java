@@ -25,14 +25,17 @@ public class Scheduler extends JFrame implements KeyListener {
         this.screen = new StartScreen();
 
         addKeyListener(this);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
 
-
-        new RecurringTask(this::repaint, 10);
+    public void run() {
+        screen = screen.updateState();
+        repaint();
     }
 
     public void schedule() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
+        new RecurringTask(this::run, 10);
     }
 
     @Override
