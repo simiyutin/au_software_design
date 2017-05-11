@@ -2,6 +2,9 @@ package roguelike.screens;
 
 import asciiPanel.AsciiPanel;
 import roguelike.models.*;
+import roguelike.models.beings.*;
+import roguelike.models.items.LootItem;
+import roguelike.models.items.Weapon;
 
 
 import java.awt.*;
@@ -23,6 +26,7 @@ public class PlayScreen implements Screen {
                 .makeCaves()
                 .addMobs(Mushroom.class, 10)
                 .addMobs(Ghost.class, 10)
+                .addMobs(Dragon.class, 2)
                 .addLoot(15)
                 .build();
 

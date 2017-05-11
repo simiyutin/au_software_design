@@ -1,6 +1,9 @@
-package roguelike.models;
+package roguelike.models.beings;
 
-import java.util.function.Function;
+import roguelike.models.Tile;
+import roguelike.models.World;
+
+import java.util.Random;
 
 /**
  * Created by boris on 10.05.17.
@@ -52,6 +55,11 @@ public abstract class ActiveBeing extends Being {
 
     public PlayerEffects getEffect() {
         return effect;
+    }
+
+
+    protected void moveRandom() {
+        move(new Random().nextInt(3) - 1, new Random().nextInt(3) - 1);
     }
 
     protected abstract void interactWithEnvironment();

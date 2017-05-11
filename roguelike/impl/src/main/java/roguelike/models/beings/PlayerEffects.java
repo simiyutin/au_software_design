@@ -1,4 +1,4 @@
-package roguelike.models;
+package roguelike.models.beings;
 
 import java.awt.event.KeyEvent;
 import java.util.function.Function;

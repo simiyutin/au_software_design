@@ -1,4 +1,4 @@
-package roguelike.models;
+package roguelike.models.items;
 
 import java.util.Arrays;
 import java.util.List;

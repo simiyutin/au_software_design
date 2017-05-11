@@ -10,6 +10,7 @@ import java.awt.*;
 public enum Tile {
     FLOOR('.', AsciiPanel.yellow, 0),
     POISONED_FLOOR('.', Color.GREEN, -5),
+    ENFLAMED_FLOOR('.', Color.RED, -5),
     WALL('#', AsciiPanel.yellow, 0),
     BOUNDS('x', AsciiPanel.brightBlack, 0);
 
@@ -36,7 +37,7 @@ public enum Tile {
     }
 
     public boolean isWalkable() {
-        return this == FLOOR || this == POISONED_FLOOR;
+        return this == FLOOR || this == POISONED_FLOOR || this == ENFLAMED_FLOOR;
     }
 
     public boolean isDiggable() {

@@ -1,4 +1,8 @@
-package roguelike.models;
+package roguelike.models.beings;
+
+import roguelike.models.items.Weapon;
+import roguelike.models.items.WeaponType;
+import roguelike.models.World;
 
 import java.awt.*;
 

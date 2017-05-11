@@ -1,15 +1,14 @@
 package roguelike.models;
 
-import roguelike.models.Tile;
-import roguelike.models.World;
+import roguelike.models.beings.Being;
+import roguelike.models.items.LootItem;
+import roguelike.models.items.Weapon;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 /**
  * Created by boris on 08.05.17.

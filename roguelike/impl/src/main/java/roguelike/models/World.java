@@ -2,6 +2,9 @@ package roguelike.models;
 
 
 import roguelike.DelayedTask;
+import roguelike.models.beings.Being;
+import roguelike.models.beings.Player;
+import roguelike.models.items.LootItem;
 
 import java.awt.Color;
 import java.util.ArrayList;

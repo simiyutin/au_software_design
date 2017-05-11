@@ -1,6 +1,8 @@
-package roguelike.models;
+package roguelike.models.beings;
 
 import asciiPanel.AsciiPanel;
+import roguelike.models.Position;
+import roguelike.models.World;
 
 import java.awt.*;
 import java.util.Random;

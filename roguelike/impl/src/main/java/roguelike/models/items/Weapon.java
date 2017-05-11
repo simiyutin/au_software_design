@@ -1,4 +1,4 @@
-package roguelike.models;
+package roguelike.models.items;
 
 import java.awt.*;
 

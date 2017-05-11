@@ -1,4 +1,7 @@
-package roguelike.models;
+package roguelike.models.items;
+
+import roguelike.models.Position;
+import roguelike.models.World;
 
 /**
  * Created by boris on 11.05.17.
