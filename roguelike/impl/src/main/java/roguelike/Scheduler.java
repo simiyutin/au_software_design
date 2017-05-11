@@ -14,7 +14,6 @@ import java.util.*;
 public class Scheduler extends JFrame implements KeyListener {
     private AsciiPanel terminal;
     private Screen screen;
-    private RecurringTask task;
 
     public Scheduler() {
         super();
@@ -28,7 +27,7 @@ public class Scheduler extends JFrame implements KeyListener {
         addKeyListener(this);
 
 
-        task = new RecurringTask(this::repaint, 10);
+        new RecurringTask(this::repaint, 10);
     }
 
     public void schedule() {

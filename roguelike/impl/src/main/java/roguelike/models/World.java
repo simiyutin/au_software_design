@@ -1,6 +1,8 @@
 package roguelike.models;
 
 
+import roguelike.DelayedTask;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,17 @@ public class World {
     private int height;
     private Player player;
     private List<Being> mobs;
+    private String message = "";
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        //todo timeoutTask;
+        this.message = message;
+        new DelayedTask(() -> this.message = "", 1000);
+    }
 
     public World(Tile[][] tiles) {
         this.tiles = tiles;

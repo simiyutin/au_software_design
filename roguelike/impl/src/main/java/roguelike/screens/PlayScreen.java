@@ -34,6 +34,7 @@ public class PlayScreen implements Screen {
         displayWorld(terminal, left, top);
         displayMobs(terminal, left, top);
         displayHealth(terminal);
+        displayMessage(terminal);
     }
 
     private int scrollLeft() {
@@ -93,5 +94,9 @@ public class PlayScreen implements Screen {
                 terminal.write(world.getGlyph(wx, wy), x, y, world.getColor(wx, wy));
             }
         }
+    }
+
+    private void displayMessage(AsciiPanel terminal) {
+        terminal.write(world.getMessage(), 40 - world.getMessage().length() / 2, 1);
     }
 }

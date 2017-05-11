@@ -15,7 +15,6 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
 
     private static boolean moveTo = true;
 
-    private RecurringTask task;
     private final int SMELL_RANGE = 15;
     private boolean alive = true;
 
@@ -25,7 +24,7 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
         this.glyph = 'G';
         this.color = Color.cyan;
 
-        task = new RecurringTask(this::move, 100);
+        new RecurringTask(this::move, 100);
     }
 
     @Override
@@ -35,9 +34,11 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
             if (effect == INVERSED) {
                 world.getMobs().remove(this);
                 world.getPlayer().setEffect(IDENTITY);
+                world.setMessage("Controls back to normal");
                 alive = false;
             } else {
                 world.getPlayer().setEffect(INVERSED);
+                world.setMessage("Controls inversed!");
             }
             moveTo = !moveTo;
         }
