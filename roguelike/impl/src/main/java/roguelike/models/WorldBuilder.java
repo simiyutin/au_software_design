@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -19,12 +20,14 @@ public class WorldBuilder {
     private int height;
     private Tile[][] tiles;
     private List<Constructor<? extends Being>> mobs;
+    private List<Weapon> loot;
 
     public WorldBuilder(int width, int height) {
         this.width = width;
         this.height = height;
         this.tiles = new Tile[width][height];
         this.mobs = new ArrayList<>();
+        this.loot = new ArrayList<>();
     }
 
     public World build() {
@@ -35,6 +38,10 @@ public class WorldBuilder {
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
+        }
+
+        for (Weapon w : loot) {
+            world.getLoot().add(new LootItem(w, world)); //todo circular dependency
         }
 
         return world;
@@ -50,8 +57,19 @@ public class WorldBuilder {
             try {
                 mobs.add(clazz.getConstructor(World.class));
             } catch (NoSuchMethodException ex) {
+                // todo log
                 ex.printStackTrace();
             }
+        }
+        return this;
+    }
+
+    public WorldBuilder addLoot(int quantity) {
+        Random randGen = new Random();
+        final int maxLevel = 2;
+        for (int i = 0; i < quantity; i++) {
+            Weapon weapon = Weapon.getRandomOfLevel(randGen.nextInt(maxLevel + 1));
+            loot.add(weapon);
         }
         return this;
     }

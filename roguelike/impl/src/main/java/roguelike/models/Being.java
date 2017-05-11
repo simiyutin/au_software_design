@@ -19,14 +19,9 @@ public abstract class Being {
     public Being(World world) {
         this.world = world;
 
-        Random randomGen = new Random(42);
-
-        do {
-
-            x = randomGen.nextInt(world.getWidth());
-            y = randomGen.nextInt(world.getHeight());
-
-        } while (world.getTile(x, y) != Tile.FLOOR || world.getMobs().stream().anyMatch(b -> b.x == x && b.y == y));
+        Position position = world.getEmptyPosition();
+        this.x = position.x;
+        this.y = position.y;
     }
 
     public char getGlyph() {

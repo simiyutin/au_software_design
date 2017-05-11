@@ -7,11 +7,14 @@ import java.awt.*;
  */
 public class Player extends ActiveBeing {
 
+    private Weapon weapon;
+
     public Player(World world) {
         super(world);
 
         this.glyph = 'X';
         this.color = Color.BLUE;
+        this.weapon = WeaponType.HAND.getItem();
     }
 
     @Override

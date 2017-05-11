@@ -23,6 +23,7 @@ public class PlayScreen implements Screen {
                 .makeCaves()
                 .addMobs(Mushroom.class, 10)
                 .addMobs(Ghost.class, 10)
+                .addLoot(15)
                 .build();
 
         player = world.getPlayer();
@@ -33,6 +34,7 @@ public class PlayScreen implements Screen {
         int top = scrollTop();
         displayWorld(terminal, left, top);
         displayMobs(terminal, left, top);
+        displayLoot(terminal, left, top);
         displayHealth(terminal);
         displayMessage(terminal);
     }
@@ -93,6 +95,13 @@ public class PlayScreen implements Screen {
 
                 terminal.write(world.getGlyph(wx, wy), x, y, world.getColor(wx, wy));
             }
+        }
+    }
+
+    public void displayLoot(AsciiPanel terminal, int left, int top) {
+        for (LootItem b: world.getLoot()) {
+            Weapon w = b.getWeapon();
+            writeSafe(terminal, w.getGlyph(), b.x - left, b.y - top, w.getColor());
         }
     }
 

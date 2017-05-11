@@ -6,6 +6,7 @@ import roguelike.DelayedTask;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by boris on 08.05.17.
@@ -17,6 +18,11 @@ public class World {
     private Player player;
     private List<Being> mobs;
     private String message = "";
+    private List<LootItem> loot;
+
+    public List<LootItem> getLoot() {
+        return loot;
+    }
 
     public String getMessage() {
         return message;
@@ -34,8 +40,10 @@ public class World {
         this.height = tiles[0].length;
 
         this.mobs = new ArrayList<>();
+        this.loot = new ArrayList<>();
         this.player = new Player(this);
         this.mobs.add(this.player);
+
     }
 
     public Tile getTile(int x, int y) {
@@ -80,5 +88,27 @@ public class World {
             }
         }
         return null;
+    }
+
+    public Position getEmptyPosition() {
+        Random randomGen = new Random();
+
+        int x;
+        int y;
+
+        do {
+
+            x = randomGen.nextInt(getWidth());
+            y = randomGen.nextInt(getHeight());
+
+        } while (!isEmptyFloor(x, y));
+
+        return new Position(x, y);
+    }
+
+    private boolean isEmptyFloor(int x, int y) {
+        return getTile(x, y) == Tile.FLOOR
+                && getMobs().stream().noneMatch(b -> b.x == x && b.y == y)
+                && getLoot().stream().noneMatch(b -> b.x == x && b.y == y);
     }
 }
