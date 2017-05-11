@@ -30,7 +30,7 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
 
     @Override
     protected void interactWithEnvironment() {
-        if (distToPlayer(x, y) == 1) {
+        if (distToPlayer(x, y) < 2) {
             PlayerEffects effect = world.getPlayer().getEffect();
             if (effect == INVERSED) {
                 world.getMobs().remove(this);
@@ -47,7 +47,7 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
     public void move() {
 
         if (!alive) return;
-        
+
         if (distToPlayer(x, y) < SMELL_RANGE) {
             if (moveTo) {
                 moveToPlayer();
@@ -67,7 +67,7 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
         double minDist = Double.POSITIVE_INFINITY;
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                if (distToPlayer(x + i, y + j) < minDist) {
+                if (distToPlayer(x + i, y + j) < minDist && canMove(x + i, y + j)) {
                     minDist = distToPlayer(x + i, y + j);
                     dx = i;
                     dy = j;
@@ -83,7 +83,7 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
         double maxDist = 0;
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                if (distToPlayer(x + i, y + j) > maxDist) {
+                if (distToPlayer(x + i, y + j) > maxDist && canMove(x + i, y + j)) {
                     maxDist = distToPlayer(x + i, y + j);
                     dx = i;
                     dy = j;

@@ -28,12 +28,16 @@ public abstract class ActiveBeing extends Being {
     public void move(int dx, int dy) {
         xDirection = Math.max(0, Math.min(x + dx, world.getWidth() - 1));
         yDirection  = Math.max(0, Math.min(y + dy, world.getHeight() - 1));
-        if (world.getTile(xDirection, yDirection).isWalkable() && world.getMob(xDirection, yDirection) == null) {
+        if (canMove(xDirection, yDirection)) {
             x = xDirection;
             y = yDirection;
         }
 
         interactWithEnvironment();
+    }
+
+    protected boolean canMove(int xTo, int yTo) {
+        return world.getTile(xTo, yTo).isWalkable() && world.getMob(xTo, yTo) == null;
     }
 
     public void act() {
