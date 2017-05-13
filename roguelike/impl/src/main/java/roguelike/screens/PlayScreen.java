@@ -27,7 +27,7 @@ public class PlayScreen implements Screen {
                 .addMobs(Mushroom.class, 10)
                 .addMobs(Ghost.class, 5)
                 .addMobs(Dragon.class, 15)
-                .addWeapons(15)
+                .addWeapons(5)
                 .addMedAids(10)
                 .build();
 
@@ -98,7 +98,8 @@ public class PlayScreen implements Screen {
     }
 
     public void displayHealth(AsciiPanel terminal) {
-        terminal.write(String.format("health: %s", player.getHealth()), 67, 1);
+        terminal.write(String.format("health: %s", player.getHealth()), 2, 1);
+        terminal.write(String.format("weapon: %s", player.getWeapon().getName()), 2, 2);
     }
 
     public void displayWorld(AsciiPanel terminal, int left, int top) {

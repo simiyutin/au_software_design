@@ -11,12 +11,18 @@ public class DeadScreen implements Screen {
 
     @Override
     public void display(AsciiPanel terminal) {
-        print(terminal, "You are dead");
+        print(terminal, "You are dead. Retry? [enter]");
+
     }
 
     @Override
     public Screen respondToUserInput(KeyEvent key) {
-        return this;
+        switch (key.getKeyCode()) {
+            case KeyEvent.VK_ENTER:
+                return new PlayScreen();
+            default:
+                return this;
+        }
     }
 
     @Override

@@ -31,20 +31,20 @@ public class Scheduler extends JFrame implements KeyListener {
     }
 
     public void run() {
-        screen = screen.updateState();
-        repaint();
+        try {
+            SwingUtilities.invokeAndWait(() -> {
+                screen = screen.updateState();
+                repaint();
+            });
+        } catch (InterruptedException e) {
+            e.printStackTrace(); // todo log
+        } catch (InvocationTargetException e) {
+            e.printStackTrace(); // todo log
+        }
     }
 
     public void schedule() {
-        new RecurringTask(() -> {
-            try {
-                SwingUtilities.invokeAndWait(this::run);
-            } catch (InterruptedException e) {
-                e.printStackTrace(); // todo log
-            } catch (InvocationTargetException e) {
-                e.printStackTrace(); // todo log
-            }
-        }, 1000 / 60);
+        new RecurringTask(this::run, 1000 / 60);
     }
 
     @Override
@@ -55,7 +55,6 @@ public class Scheduler extends JFrame implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         screen = screen.respondToUserInput(e);
-        repaint();
     }
 
     @Override

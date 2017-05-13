@@ -21,6 +21,7 @@ public class Weapon implements Item {
     }
 
     public String getName() { // todo handle level name correlation
+        if (type == WeaponType.HAND) return type.getName();
         return type.getName() + String.format(" of level %d", level);
     }
 

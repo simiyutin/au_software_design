@@ -67,9 +67,9 @@ public class WorldBuilder {
 
     public WorldBuilder addWeapons(int quantity) {
         Random randGen = new Random();
-        final int maxLevel = 2;
+        final int maxLevel = 2; // todo global constant
         for (int i = 0; i < quantity; i++) {
-            Weapon weapon = Weapon.getRandomOfLevel(randGen.nextInt(maxLevel + 1));
+            Weapon weapon = Weapon.getRandomOfLevel(1 + randGen.nextInt(maxLevel));
             loot.add(weapon);
         }
         return this;

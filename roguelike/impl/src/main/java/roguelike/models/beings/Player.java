@@ -36,6 +36,8 @@ public class Player extends ActiveBeing {
             Item item = thrownItem.getItem();
             if (item instanceof Weapon) {
                 weapon = (Weapon) item;
+                world.getLoot().removeIf(w ->
+                        w.getItem() instanceof Weapon && ((Weapon) w.getItem()).getLevel() <= weapon.getLevel());
             } else if (item instanceof MedAid) {
                 health += ((MedAid) item).getValue();
                 health = Math.min(health, 100);
@@ -80,6 +82,10 @@ public class Player extends ActiveBeing {
                 setHealth(health - harm);
             }
         }, 500);
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
     }
 
     class RegularAction implements Action {
