@@ -1,5 +1,6 @@
 package com.simiyutin.au.roguelike.util;
 
+import com.simiyutin.au.roguelike.Main;
 import com.simiyutin.au.roguelike.models.Tile;
 import com.simiyutin.au.roguelike.models.World;
 import com.simiyutin.au.roguelike.models.beings.Being;
@@ -7,6 +8,8 @@ import com.simiyutin.au.roguelike.models.items.Item;
 import com.simiyutin.au.roguelike.models.items.MedAid;
 import com.simiyutin.au.roguelike.models.items.ThrownItem;
 import com.simiyutin.au.roguelike.models.items.Weapon;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
 import java.lang.reflect.Constructor;
@@ -26,7 +29,9 @@ public class WorldBuilder {
     private List<Constructor<? extends Being>> mobs;
     private List<Item> loot;
     private int minLevel;
-    private static final RandomBGColorGenerator colorGen = new RandomBGColorGenerator();;
+    private static final RandomBGColorGenerator colorGen = new RandomBGColorGenerator();
+
+    private static final Logger LOGGER = LogManager.getLogger(WorldBuilder.class);
 
     public WorldBuilder(int width, int height) {
         this.width = width;
@@ -53,7 +58,7 @@ public class WorldBuilder {
             try {
                 world.getMobs().add(c.newInstance(world));
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
+                LOGGER.error(e);
             }
         }
 
@@ -82,8 +87,7 @@ public class WorldBuilder {
             try {
                 mobs.add(clazz.getConstructor(World.class));
             } catch (NoSuchMethodException ex) {
-                // todo log
-                ex.printStackTrace();
+                LOGGER.error(ex);
             }
         }
         return this;

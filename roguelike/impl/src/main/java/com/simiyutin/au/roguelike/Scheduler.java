@@ -4,6 +4,8 @@ import asciiPanel.AsciiPanel;
 import com.simiyutin.au.roguelike.screens.Screen;
 import com.simiyutin.au.roguelike.screens.StartScreen;
 import com.simiyutin.au.roguelike.util.RecurringTask;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -14,6 +16,8 @@ import java.lang.reflect.InvocationTargetException;
 public class Scheduler extends JFrame implements KeyListener {
     private AsciiPanel terminal;
     private Screen screen;
+
+    private static final Logger LOGGER = LogManager.getLogger(Scheduler.class);
 
     public Scheduler() {
         super();
@@ -35,10 +39,8 @@ public class Scheduler extends JFrame implements KeyListener {
                 screen = screen.updateState();
                 repaint();
             });
-        } catch (InterruptedException e) {
-            e.printStackTrace(); // todo log
-        } catch (InvocationTargetException e) {
-            e.printStackTrace(); // todo log
+        } catch (InterruptedException | InvocationTargetException e) {
+            LOGGER.error(e);
         }
     }
 
