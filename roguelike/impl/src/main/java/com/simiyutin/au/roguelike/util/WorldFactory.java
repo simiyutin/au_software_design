@@ -12,6 +12,7 @@ import com.simiyutin.au.roguelike.models.beings.Mushroom;
 public class WorldFactory {
     public static World getOfMinLevel(int level) {
         World result = new WorldBuilder(100, 100)
+                .withCaves()
                 .ofMinLevel(level)
                 .addMobs(Mushroom.class, 10)
                 .addMobs(Ghost.class, 10)
@@ -25,6 +26,7 @@ public class WorldFactory {
 
     public static World getTestConfig(int level) {
         World result = new WorldBuilder(100, 100)
+                .withCaves()
                 .ofMinLevel(level)
                 .addMobs(Mushroom.class, 10)
                 .addMobs(Ghost.class, 0)
