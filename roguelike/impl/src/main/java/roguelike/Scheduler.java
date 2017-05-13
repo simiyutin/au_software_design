@@ -3,13 +3,12 @@ package roguelike;
 import asciiPanel.AsciiPanel;
 import roguelike.screens.Screen;
 import roguelike.screens.StartScreen;
+import roguelike.util.RecurringTask;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
 
 
 public class Scheduler extends JFrame implements KeyListener {

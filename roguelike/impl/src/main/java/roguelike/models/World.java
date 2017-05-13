@@ -1,7 +1,7 @@
 package roguelike.models;
 
 
-import roguelike.DelayedTask;
+import roguelike.util.DelayedTask;
 import roguelike.models.beings.Being;
 import roguelike.models.beings.Player;
 import roguelike.models.items.ThrownItem;
@@ -149,6 +149,18 @@ public class World {
         return getTile(x, y) == Tile.FLOOR
                 && getMobs().stream().noneMatch(b -> b.x == x && b.y == y)
                 && getLoot().stream().noneMatch(b -> b.x == x && b.y == y);
+    }
+
+    public void setTilesAround(int x, int y, int radius, Tile tile) {
+        for (int i = -radius; i <= radius; i++) {
+            for (int j = -radius; j <= radius; j++) {
+                int wx = x + i;
+                int wy = y + j;
+                if (i * i + j * j <= radius * radius && getTile(wx, wy) == Tile.FLOOR) {
+                    setTile(wx, wy, tile);
+                }
+            }
+        }
     }
 
     private static class WorldData {

@@ -1,4 +1,4 @@
-package roguelike;
+package roguelike.util;
 
 import java.awt.*;
 import java.util.Random;

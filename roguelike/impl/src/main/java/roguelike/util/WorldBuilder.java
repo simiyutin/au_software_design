@@ -1,6 +1,7 @@
-package roguelike.models;
+package roguelike.util;
 
-import roguelike.RandomColorGenerator;
+import roguelike.models.Tile;
+import roguelike.models.World;
 import roguelike.models.beings.Being;
 import roguelike.models.items.Item;
 import roguelike.models.items.MedAid;

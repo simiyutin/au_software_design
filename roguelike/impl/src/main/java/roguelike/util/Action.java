@@ -1,4 +1,4 @@
-package roguelike.models.actions;
+package roguelike.util;
 
 /**
  * Created by boris on 11.05.17.

@@ -1,7 +1,7 @@
 package roguelike.models.items;
 
 import roguelike.models.World;
-import roguelike.models.WorldBuilder;
+import roguelike.util.WorldBuilder;
 import roguelike.models.beings.Dragon;
 import roguelike.models.beings.Ghost;
 import roguelike.models.beings.Mushroom;

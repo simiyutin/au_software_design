@@ -1,6 +1,6 @@
 package roguelike.models.beings;
 
-import roguelike.RecurringTask;
+import roguelike.util.RecurringTask;
 import roguelike.models.World;
 
 import java.awt.*;

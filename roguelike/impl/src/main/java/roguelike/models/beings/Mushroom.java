@@ -2,7 +2,6 @@ package roguelike.models.beings;
 
 import roguelike.models.Tile;
 import roguelike.models.World;
-import roguelike.models.actions.Actions;
 
 import java.awt.*;
 
@@ -21,6 +20,6 @@ public class Mushroom extends Being {
     }
 
     private void poisonTiles() {
-        Actions.setTilesAround(world, x, y, 3, Tile.POISONED_FLOOR);
+        world.setTilesAround(x, y, 3, Tile.POISONED_FLOOR);
     }
 }

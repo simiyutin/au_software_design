@@ -1,9 +1,8 @@
 package roguelike.models.beings;
 
-import roguelike.RecurringTask;
+import roguelike.util.RecurringTask;
 import roguelike.models.Tile;
 import roguelike.models.World;
-import roguelike.models.actions.Actions;
 
 import java.awt.*;
 
@@ -38,6 +37,6 @@ public class Dragon extends ActiveBeing implements ArtificialIntelligence {
     }
 
     private void enflameTiles() {
-        Actions.setTilesAround(world, x, y, 0, Tile.ENFLAMED_FLOOR);
+        world.setTilesAround(x, y, 0, Tile.ENFLAMED_FLOOR);
     }
 }

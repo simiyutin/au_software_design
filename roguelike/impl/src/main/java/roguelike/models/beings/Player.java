@@ -1,10 +1,10 @@
 package roguelike.models.beings;
 
-import roguelike.DelayedTask;
-import roguelike.RecurringTask;
+import roguelike.util.DelayedTask;
+import roguelike.util.RecurringTask;
 import roguelike.models.Position;
 import roguelike.models.Tile;
-import roguelike.models.actions.Action;
+import roguelike.util.Action;
 import roguelike.models.items.*;
 import roguelike.models.World;
 
