@@ -9,7 +9,6 @@ import com.simiyutin.au.roguelike.models.items.Weapon;
 import com.simiyutin.au.roguelike.util.WorldBuilder;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
-import sun.java2d.pipe.hw.AccelDeviceEventListener;
 
 import java.util.stream.Collectors;
 

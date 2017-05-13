@@ -5,12 +5,8 @@ import com.simiyutin.au.roguelike.models.Tile;
 import com.simiyutin.au.roguelike.models.World;
 import com.simiyutin.au.roguelike.models.beings.Ghost;
 import com.simiyutin.au.roguelike.util.WorldBuilder;
-import com.simiyutin.au.roguelike.util.WorldFactory;
-import javafx.geometry.Pos;
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /**

@@ -7,6 +7,7 @@
     <groupId>simiyutin</groupId>
     <artifactId>roguelike</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <build>
         <plugins>
             <plugin>
@@ -17,15 +18,49 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-            </plugin></plugins>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <!-- nothing here -->
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.simiyutin.au.roguelike.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>my-local-repo</id>
+            <url>file://${project.basedir}/repo</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>net.trystan</groupId>
             <artifactId>ascii-panel</artifactId>
             <version>1.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/ascii-panel/asciiPanel.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -43,10 +78,4 @@
             <version>2.8.1</version>
         </dependency>
     </dependencies>
-
-
-
-
-
-
 </project>
