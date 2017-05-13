@@ -4,9 +4,7 @@ import asciiPanel.AsciiPanel;
 
 import java.awt.*;
 
-/**
- * Created by boris on 08.05.17.
- */
+
 public enum Tile {
     FLOOR('.', AsciiPanel.yellow, 0, true),
     POISONED_FLOOR('.', Color.GREEN, -5, true),

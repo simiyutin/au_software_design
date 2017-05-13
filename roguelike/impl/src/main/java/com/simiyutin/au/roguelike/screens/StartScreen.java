@@ -1,13 +1,19 @@
 package com.simiyutin.au.roguelike.screens;
 
 import asciiPanel.AsciiPanel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.event.KeyEvent;
 
-/**
- * Created by boris on 08.05.17.
- */
+
 public class StartScreen implements Screen {
+
+    private static final Logger LOGGER = LogManager.getLogger(StartScreen.class);
+
+    public StartScreen() {
+        LOGGER.trace("start screen showed");
+    }
 
     @Override
     public void display(AsciiPanel terminal) {

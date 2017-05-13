@@ -2,9 +2,7 @@ package com.simiyutin.au.roguelike.models.items;
 
 import java.awt.*;
 
-/**
- * Created by boris on 11.05.17.
- */
+
 public class Weapon implements Item {
     private WeaponType type;
     private final int MAX_LEVEL = 10;

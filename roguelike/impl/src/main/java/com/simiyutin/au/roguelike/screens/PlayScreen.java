@@ -1,28 +1,31 @@
 package com.simiyutin.au.roguelike.screens;
 
 import asciiPanel.AsciiPanel;
+import com.simiyutin.au.roguelike.Main;
 import com.simiyutin.au.roguelike.models.*;
 import com.simiyutin.au.roguelike.models.beings.*;
 import com.simiyutin.au.roguelike.models.items.Item;
 import com.simiyutin.au.roguelike.models.items.ThrownItem;
 import com.simiyutin.au.roguelike.util.WorldFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-/**
- * Created by boris on 08.05.17.
- */
+
 public class PlayScreen implements Screen {
 
     private final World world;
     private final int screenWidth = 80;
     private final int screenHeight = 24;
+    private static final Logger LOGGER = LogManager.getLogger(PlayScreen.class);
+
 
     public PlayScreen() {
-
         world = WorldFactory.getOfMinLevel(1);
+        LOGGER.trace("Game screen created");
     }
 
     @Override

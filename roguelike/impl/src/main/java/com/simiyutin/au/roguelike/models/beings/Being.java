@@ -5,9 +5,7 @@ import com.simiyutin.au.roguelike.models.World;
 
 import java.awt.*;
 
-/**
- * Created by boris on 09.05.17.
- */
+
 public abstract class Being {
     public int x;
     public int y;

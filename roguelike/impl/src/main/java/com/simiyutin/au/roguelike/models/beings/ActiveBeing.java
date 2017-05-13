@@ -4,9 +4,7 @@ import com.simiyutin.au.roguelike.models.World;
 
 import java.util.Random;
 
-/**
- * Created by boris on 10.05.17.
- */
+
 public abstract class ActiveBeing extends Being {
 
     protected int xDirection;

@@ -1,6 +1,5 @@
 package com.simiyutin.au.roguelike.util;
 
-import com.simiyutin.au.roguelike.Main;
 import com.simiyutin.au.roguelike.models.Tile;
 import com.simiyutin.au.roguelike.models.World;
 import com.simiyutin.au.roguelike.models.beings.Being;
@@ -18,9 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by boris on 08.05.17.
- */
+
 public class WorldBuilder {
 
     private int width;

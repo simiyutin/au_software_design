@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by boris on 08.05.17.
- */
+
 public class World {
 
     private WorldData d;

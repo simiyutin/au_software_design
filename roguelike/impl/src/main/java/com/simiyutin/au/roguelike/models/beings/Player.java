@@ -1,23 +1,25 @@
 package com.simiyutin.au.roguelike.models.beings;
 
-import com.simiyutin.au.roguelike.util.DelayedTask;
-import com.simiyutin.au.roguelike.util.RecurringTask;
 import com.simiyutin.au.roguelike.models.Position;
 import com.simiyutin.au.roguelike.models.Tile;
-import com.simiyutin.au.roguelike.util.Action;
-import com.simiyutin.au.roguelike.models.items.*;
 import com.simiyutin.au.roguelike.models.World;
+import com.simiyutin.au.roguelike.models.items.*;
+import com.simiyutin.au.roguelike.util.Action;
+import com.simiyutin.au.roguelike.util.DelayedTask;
+import com.simiyutin.au.roguelike.util.RecurringTask;
 import com.simiyutin.au.roguelike.util.WorldFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
 
-/**
- * Created by boris on 09.05.17.
- */
+
 public class Player extends ActiveBeing {
 
     private Weapon weapon;
     private Action action;
+
+    private static final Logger LOGGER = LogManager.getLogger(Player.class);
 
     public Player(World world) {
         super(world);
@@ -36,6 +38,7 @@ public class Player extends ActiveBeing {
         y = pos.y;
         newWorld.setPlayer(this);
         world.moveDataFrom(newWorld);
+        LOGGER.trace("player level upped");
     }
 
     public void act() {
@@ -55,10 +58,12 @@ public class Player extends ActiveBeing {
         if (thrownItem != null) {
             Item item = thrownItem.getItem();
             if (item instanceof Weapon) {
+                LOGGER.trace(String.format("picked up weapon: %s", item.getName()));
                 weapon = (Weapon) item;
                 world.getItems().removeIf(w ->
                         w.getItem() instanceof Weapon && ((Weapon) w.getItem()).getLevel() <= weapon.getLevel());
             } else if (item instanceof MedAid) {
+                LOGGER.trace("picked up med aid");
                 health += ((MedAid) item).getValue();
                 health = Math.min(health, 100);
             }
@@ -92,6 +97,7 @@ public class Player extends ActiveBeing {
         setImmobilized(true);
         dragon.setImmobilized(true);
         action = new AttackingAction(dragon);
+        LOGGER.trace("started battle with dragon");
         new RecurringTask(() -> {
             if (dragon.isAlive()) {
                 int harm = dragon.getLevel();
@@ -136,6 +142,7 @@ public class Player extends ActiveBeing {
             world.setMessage(String.format("enemy health: %d", enemy.getHealth()));
             if (enemy.getHealth() < 0) {
                 world.setMessage("You won!");
+                LOGGER.trace("player won battle with dragon");
                 weapon = Weapon.getRandomOfLevel(enemy.getLevel() + 2);
                 new DelayedTask(() -> world.setMessage(String.format("Obtained %s", weapon.getName())), 1000);
                 world.getMobs().remove(enemy);

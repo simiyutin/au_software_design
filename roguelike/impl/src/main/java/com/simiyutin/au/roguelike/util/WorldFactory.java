@@ -6,9 +6,7 @@ import com.simiyutin.au.roguelike.models.beings.Dragon;
 import com.simiyutin.au.roguelike.models.beings.Ghost;
 import com.simiyutin.au.roguelike.models.beings.Mushroom;
 
-/**
- * Created by boris on 13.05.17.
- */
+
 public class WorldFactory {
     public static World getOfMinLevel(int level) {
         World result = new WorldBuilder(100, 100)

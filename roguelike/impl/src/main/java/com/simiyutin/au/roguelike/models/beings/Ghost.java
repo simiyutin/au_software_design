@@ -8,9 +8,7 @@ import java.awt.*;
 import static com.simiyutin.au.roguelike.models.beings.SideEffect.IDENTITY;
 import static com.simiyutin.au.roguelike.models.beings.SideEffect.INVERSED;
 
-/**
- * Created by boris on 10.05.17.
- */
+
 public class Ghost extends ActiveBeing implements ArtificialIntelligence {
 
     private static boolean moveTo = true;

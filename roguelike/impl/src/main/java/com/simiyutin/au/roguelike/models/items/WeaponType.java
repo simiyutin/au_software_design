@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by boris on 11.05.17.
- */
+
 public enum WeaponType {
     HAND('h', "hand", 1, 10),
     SWORD('>', "sword", 10, 150);

@@ -6,9 +6,7 @@ import com.simiyutin.au.roguelike.models.World;
 
 import java.awt.*;
 
-/**
- * Created by boris on 11.05.17.
- */
+
 public class Dragon extends ActiveBeing implements ArtificialIntelligence {
 
     public static boolean isSelfActing = true;

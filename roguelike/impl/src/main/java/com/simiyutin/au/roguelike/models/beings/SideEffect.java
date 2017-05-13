@@ -3,9 +3,7 @@ package com.simiyutin.au.roguelike.models.beings;
 import java.awt.event.KeyEvent;
 import java.util.function.Function;
 
-/**
- * Created by boris on 10.05.17.
- */
+
 public enum SideEffect {
 
     IDENTITY(Function.identity()),

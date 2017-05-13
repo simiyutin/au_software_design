@@ -3,9 +3,7 @@ package com.simiyutin.au.roguelike.util;
 import java.awt.*;
 import java.util.Random;
 
-/**
- * Created by boris on 13.05.17.
- */
+
 public class RandomBGColorGenerator {
     private final Random randomGen = new Random(42);
 
