@@ -16,9 +16,9 @@ import java.awt.event.KeyEvent;
  */
 public class PlayScreen implements Screen {
 
-    private World world;
-    private int screenWidth = 80;
-    private int screenHeight = 24;
+    private final World world;
+    private final int screenWidth = 80;
+    private final int screenHeight = 24;
 
     public PlayScreen() {
 
@@ -67,7 +67,7 @@ public class PlayScreen implements Screen {
                 world.printTiles();
                 break;
             case KeyEvent.VK_Z:
-                world.getPlayer().zlevel();
+                world.getPlayer().levelUp();
                 break;
         }
         return updateState();

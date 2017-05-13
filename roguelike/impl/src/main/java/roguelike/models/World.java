@@ -53,7 +53,6 @@ public class World {
         this.d.loot = new ArrayList<>();
         this.d.minLevel = 1;
         this.d.player = new Player(this);
-//        this.d.mobs.add(this.d.player);
     }
 
 
@@ -140,7 +139,7 @@ public class World {
         d.player = player;
     }
 
-    public void swapData(World other) {
+    public void moveDataFrom(World other) {
         d = other.d;
     }
 

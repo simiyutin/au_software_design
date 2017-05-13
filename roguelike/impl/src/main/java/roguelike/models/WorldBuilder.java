@@ -1,11 +1,13 @@
 package roguelike.models;
 
+import roguelike.RandomColorGenerator;
 import roguelike.models.beings.Being;
 import roguelike.models.items.Item;
 import roguelike.models.items.MedAid;
 import roguelike.models.items.ThrownItem;
 import roguelike.models.items.Weapon;
 
+import java.awt.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class WorldBuilder {
     private List<Constructor<? extends Being>> mobs;
     private List<Item> loot;
     private int minLevel;
+    private static final RandomColorGenerator colorGen = new RandomColorGenerator();;
 
     public WorldBuilder(int width, int height) {
         this.width = width;
@@ -36,6 +39,9 @@ public class WorldBuilder {
     public World build() {
         World world = new World(tiles);
         world.setMinLevel(minLevel);
+        Color color = colorGen.getColor();
+        Tile.FLOOR.setColor(color);
+        Tile.WALL.setColor(color);
 
         for (Constructor<? extends Being> c : mobs) {
             try {

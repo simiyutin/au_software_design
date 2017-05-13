@@ -55,18 +55,18 @@ public class Player extends ActiveBeing {
         }
 
         if (world.getTile(x, y) == Tile.Z_TELEPORT) {
-            zlevel();
+            levelUp();
         }
     }
 
-    public void zlevel() {
+    public void levelUp() {
         level++;
         World newWorld = WorldFactory.getOfMinLevel(world.getMinLevel() + 1);
         Position pos = newWorld.getEmptyPosition();
         x = pos.x;
         y = pos.y;
         newWorld.setPlayer(this);
-        world.swapData(newWorld);
+        world.moveDataFrom(newWorld);
     }
 
     public Being getMobNearMe() {

@@ -16,7 +16,7 @@ public abstract class Being {
 
     protected char glyph;
     protected Color color;
-    protected World world;
+    protected final World world;
 
     public Being(World world) {
         this.world = world;

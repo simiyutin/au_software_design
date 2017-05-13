@@ -27,6 +27,10 @@ public enum Tile {
         this.isWalkable = isWalkable;
     }
 
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     public char getGlyph() {
         return glyph;
     }
