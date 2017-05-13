@@ -41,7 +41,7 @@ public class PlayScreen implements Screen {
         displayWorld(terminal, left, top);
         displayMobs(terminal, left, top);
         displayLoot(terminal, left, top);
-        displayHealth(terminal);
+        displayInfo(terminal);
         displayMessage(terminal);
     }
 
@@ -97,7 +97,7 @@ public class PlayScreen implements Screen {
         }
     }
 
-    public void displayHealth(AsciiPanel terminal) {
+    public void displayInfo(AsciiPanel terminal) {
         terminal.write(String.format("health: %s", player.getHealth()), 2, 1);
         terminal.write(String.format("weapon: %s", player.getWeapon().getName()), 2, 2);
     }
