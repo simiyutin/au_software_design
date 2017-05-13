@@ -96,8 +96,9 @@ public class PlayScreen implements Screen {
     }
 
     public void displayInfo(AsciiPanel terminal) {
-        terminal.write(String.format("health: %s", world.getPlayer().getHealth()), 1, 1);
-        terminal.write(String.format("weapon: %s", world.getPlayer().getWeapon().getName()), 1, 2);
+        terminal.write(String.format("level: %s", world.getPlayer().getLevel()), 1, 1);
+        terminal.write(String.format("health: %s", world.getPlayer().getHealth()), 1, 2);
+        terminal.write(String.format("weapon: %s", world.getPlayer().getWeapon().getName()), 1, 3);
     }
 
     public void displayWorld(AsciiPanel terminal, int left, int top) {

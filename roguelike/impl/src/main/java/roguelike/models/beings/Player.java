@@ -30,7 +30,7 @@ public class Player extends ActiveBeing {
     @Override
     protected void interactWithEnvironment() {
         int deltaHealth = world.getTile(x, y).getDeltaHealth();
-        health += deltaHealth;
+        health += deltaHealth * level;
 
         ThrownItem thrownItem = world.getItem(x, y);
         if (thrownItem != null) {
@@ -60,6 +60,7 @@ public class Player extends ActiveBeing {
     }
 
     public void zlevel() {
+        level++;
         World newWorld = WorldFactory.getOfMinLevel(world.getMinLevel() + 1);
         Position pos = newWorld.getEmptyPosition();
         x = pos.x;

@@ -35,6 +35,8 @@ public class WorldBuilder {
 
     public World build() {
         World world = new World(tiles);
+        world.setMinLevel(minLevel);
+
         for (Constructor<? extends Being> c : mobs) {
             try {
                 world.getMobs().add(c.newInstance(world));
@@ -76,9 +78,8 @@ public class WorldBuilder {
 
     public WorldBuilder addWeapons(int quantity) {
         Random randGen = new Random();
-        final int maxLevel = 2; // todo global constant
         for (int i = 0; i < quantity; i++) {
-            Weapon weapon = Weapon.getRandomOfLevel(1 + randGen.nextInt(maxLevel));
+            Weapon weapon = Weapon.getRandomOfLevel(minLevel + randGen.nextInt(2));
             loot.add(weapon);
         }
         return this;

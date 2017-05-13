@@ -24,7 +24,7 @@ public abstract class ActiveBeing extends Being {
         super(world);
         this.health = 100;
         this.effect = SideEffect.IDENTITY;
-        this.level = 1;
+        this.level = world.getMinLevel();
         this.immobilized = false;
         this.alive = true;
     }
