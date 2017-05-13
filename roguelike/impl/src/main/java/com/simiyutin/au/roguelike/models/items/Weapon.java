@@ -25,6 +25,10 @@ public class Weapon implements Item {
         return type.getName() + String.format(" of level %d", level);
     }
 
+    public int getHarm() {
+        return type.getHarm();
+    }
+
     public char getGlyph() {
         return type.getGlyph();
     }

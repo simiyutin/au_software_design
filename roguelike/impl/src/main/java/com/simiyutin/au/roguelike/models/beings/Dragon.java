@@ -10,6 +10,7 @@ import java.awt.*;
  * Created by boris on 11.05.17.
  */
 public class Dragon extends ActiveBeing implements ArtificialIntelligence {
+
     public Dragon(World world) {
         super(world);
 

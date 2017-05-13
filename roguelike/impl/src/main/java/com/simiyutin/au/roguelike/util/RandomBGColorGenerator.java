@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * Created by boris on 13.05.17.
  */
-public class RandomColorGenerator {
+public class RandomBGColorGenerator {
     private final Random randomGen = new Random(42);
 
     public Color getColor() {

@@ -18,6 +18,18 @@ public class World {
 
     private WorldData d;
 
+    public World(Tile[][] tiles) {
+        this.d = new WorldData();
+        this.d.tiles = tiles;
+        this.d.width = tiles.length;
+        this.d.height = tiles[0].length;
+
+        this.d.mobs = new ArrayList<>();
+        this.d.loot = new ArrayList<>();
+        this.d.minLevel = 1;
+        this.d.player = new Player(this);
+    }
+
     public List<ThrownItem> getLoot() {
         return d.loot;
     }
@@ -42,20 +54,6 @@ public class World {
             }
         }, 1000);
     }
-
-    public World(Tile[][] tiles) {
-        this.d = new WorldData();
-        this.d.tiles = tiles;
-        this.d.width = tiles.length;
-        this.d.height = tiles[0].length;
-
-        this.d.mobs = new ArrayList<>();
-        this.d.loot = new ArrayList<>();
-        this.d.minLevel = 1;
-        this.d.player = new Player(this);
-    }
-
-
 
     public Tile getTile(int x, int y) {
         if (x < 0 || x > getWidth() - 1 || y < 0 || y > getHeight() - 1) {
@@ -139,18 +137,6 @@ public class World {
         d.player = player;
     }
 
-    public void moveDataFrom(World other) {
-        d = other.d;
-    }
-
-
-
-    private boolean isEmptyFloor(int x, int y) {
-        return getTile(x, y) == Tile.FLOOR
-                && getMobs().stream().noneMatch(b -> b.x == x && b.y == y)
-                && getLoot().stream().noneMatch(b -> b.x == x && b.y == y);
-    }
-
     public void setTilesAround(int x, int y, int radius, Tile tile) {
         for (int i = -radius; i <= radius; i++) {
             for (int j = -radius; j <= radius; j++) {
@@ -161,6 +147,17 @@ public class World {
                 }
             }
         }
+    }
+
+    public void moveDataFrom(World other) {
+        d = other.d;
+    }
+
+
+    private boolean isEmptyFloor(int x, int y) {
+        return getTile(x, y) == Tile.FLOOR
+                && getMobs().stream().noneMatch(b -> b.x == x && b.y == y)
+                && getLoot().stream().noneMatch(b -> b.x == x && b.y == y);
     }
 
     private static class WorldData {

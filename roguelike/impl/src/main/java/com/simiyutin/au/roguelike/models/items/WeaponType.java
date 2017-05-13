@@ -31,6 +31,10 @@ public enum WeaponType {
         return glyph;
     }
 
+    public int getHarm() {
+        return harm;
+    }
+
     public int getHue() {
         return hue;
     }

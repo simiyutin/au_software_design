@@ -26,7 +26,7 @@ public class WorldBuilder {
     private List<Constructor<? extends Being>> mobs;
     private List<Item> loot;
     private int minLevel;
-    private static final RandomColorGenerator colorGen = new RandomColorGenerator();;
+    private static final RandomBGColorGenerator colorGen = new RandomBGColorGenerator();;
 
     public WorldBuilder(int width, int height) {
         this.width = width;

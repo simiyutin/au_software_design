@@ -1,4 +1,4 @@
-package com.simiyutin.au.roguelike.models.items;
+package com.simiyutin.au.roguelike.util;
 
 import com.simiyutin.au.roguelike.models.World;
 import com.simiyutin.au.roguelike.util.WorldBuilder;

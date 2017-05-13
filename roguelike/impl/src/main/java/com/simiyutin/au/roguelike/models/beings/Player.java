@@ -7,6 +7,7 @@ import com.simiyutin.au.roguelike.models.Tile;
 import com.simiyutin.au.roguelike.util.Action;
 import com.simiyutin.au.roguelike.models.items.*;
 import com.simiyutin.au.roguelike.models.World;
+import com.simiyutin.au.roguelike.util.WorldFactory;
 
 import java.awt.*;
 
@@ -25,6 +26,24 @@ public class Player extends ActiveBeing {
         this.color = Color.BLUE;
         this.weapon = WeaponType.HAND.getItem();
         this.action = new RegularAction();
+    }
+
+    public void levelUp() {
+        level++;
+        World newWorld = WorldFactory.getOfMinLevel(world.getMinLevel() + 1);
+        Position pos = newWorld.getEmptyPosition();
+        x = pos.x;
+        y = pos.y;
+        newWorld.setPlayer(this);
+        world.moveDataFrom(newWorld);
+    }
+
+    public void act() {
+        action.act();
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
     }
 
     @Override
@@ -59,17 +78,7 @@ public class Player extends ActiveBeing {
         }
     }
 
-    public void levelUp() {
-        level++;
-        World newWorld = WorldFactory.getOfMinLevel(world.getMinLevel() + 1);
-        Position pos = newWorld.getEmptyPosition();
-        x = pos.x;
-        y = pos.y;
-        newWorld.setPlayer(this);
-        world.moveDataFrom(newWorld);
-    }
-
-    public Being getMobNearMe() {
+    private Being getMobNearMe() {
         for (Being b : world.getMobs()) {
             if (distTo(b.x, b.y) == 1) {
                 return b;
@@ -77,14 +86,6 @@ public class Player extends ActiveBeing {
         }
 
         return null;
-    }
-
-    private double distTo(int toX, int toY) {
-        return Math.hypot(toX - x, toY - y);
-    }
-
-    public void act() {
-        action.act();
     }
 
     private void startBattleWithDragon(Dragon dragon) {
@@ -99,8 +100,8 @@ public class Player extends ActiveBeing {
         }, 500);
     }
 
-    public Weapon getWeapon() {
-        return weapon;
+    private double distTo(int toX, int toY) {
+        return Math.hypot(toX - x, toY - y);
     }
 
     class RegularAction implements Action {
@@ -129,7 +130,7 @@ public class Player extends ActiveBeing {
 
         @Override
         public void act() {
-            int harm = level * weapon.getLevel();
+            int harm = level * weapon.getLevel() + weapon.getHarm();
             int health = enemy.getHealth();
             enemy.setHealth(health - harm);
             world.setMessage(String.format("enemy health: %d", enemy.getHealth()));

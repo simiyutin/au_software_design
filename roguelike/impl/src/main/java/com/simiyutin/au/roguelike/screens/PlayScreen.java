@@ -5,7 +5,7 @@ import com.simiyutin.au.roguelike.models.*;
 import com.simiyutin.au.roguelike.models.beings.*;
 import com.simiyutin.au.roguelike.models.items.Item;
 import com.simiyutin.au.roguelike.models.items.ThrownItem;
-import com.simiyutin.au.roguelike.models.items.WorldFactory;
+import com.simiyutin.au.roguelike.util.WorldFactory;
 
 
 import java.awt.*;
@@ -34,14 +34,6 @@ public class PlayScreen implements Screen {
         displayLoot(terminal, left, top);
         displayInfo(terminal);
         displayMessage(terminal);
-    }
-
-    private int scrollLeft() {
-        return Math.max(0, Math.min(world.getPlayer().x - screenWidth / 2, world.getWidth() - screenWidth));
-    }
-
-    private int scrollTop() {
-        return Math.max(0, Math.min(world.getPlayer().y - screenHeight / 2, world.getHeight() - screenHeight));
     }
 
     @Override
@@ -78,7 +70,7 @@ public class PlayScreen implements Screen {
         return world.getPlayer().getHealth() > 0 ? this : new DeadScreen();
     }
 
-    public void displayMobs(AsciiPanel terminal, int left, int top) {
+    private void displayMobs(AsciiPanel terminal, int left, int top) {
 
         for (Being b: world.getMobs()) {
             writeSafe(terminal, b.getGlyph(), b.x - left, b.y - top, b.getColor());
@@ -89,19 +81,7 @@ public class PlayScreen implements Screen {
 
     }
 
-    private void writeSafe(AsciiPanel terminal, char c, int x, int y, Color color) {
-        if (x > 0 && x < screenWidth && y > 0 && y < screenHeight) {
-            terminal.write(c, x, y, color);
-        }
-    }
-
-    public void displayInfo(AsciiPanel terminal) {
-        terminal.write(String.format("level: %s", world.getPlayer().getLevel()), 1, 1);
-        terminal.write(String.format("health: %s", world.getPlayer().getHealth()), 1, 2);
-        terminal.write(String.format("weapon: %s", world.getPlayer().getWeapon().getName()), 1, 3);
-    }
-
-    public void displayWorld(AsciiPanel terminal, int left, int top) {
+    private void displayWorld(AsciiPanel terminal, int left, int top) {
 
         for (int x = 0; x < screenWidth; x++) {
             for (int y = 0; y < screenHeight; y++) {
@@ -113,7 +93,7 @@ public class PlayScreen implements Screen {
         }
     }
 
-    public void displayLoot(AsciiPanel terminal, int left, int top) {
+    private void displayLoot(AsciiPanel terminal, int left, int top) {
         for (ThrownItem b: world.getLoot()) {
             Item item = b.getItem();
             writeSafe(terminal, item.getGlyph(), b.x - left, b.y - top, item.getColor());
@@ -122,5 +102,25 @@ public class PlayScreen implements Screen {
 
     private void displayMessage(AsciiPanel terminal) {
         terminal.write(world.getMessage(), 40 - world.getMessage().length() / 2, 5);
+    }
+
+    private void displayInfo(AsciiPanel terminal) {
+        terminal.write(String.format("level: %s", world.getPlayer().getLevel()), 1, 1);
+        terminal.write(String.format("health: %s", world.getPlayer().getHealth()), 1, 2);
+        terminal.write(String.format("weapon: %s", world.getPlayer().getWeapon().getName()), 1, 3);
+    }
+
+    private int scrollTop() {
+        return Math.max(0, Math.min(world.getPlayer().y - screenHeight / 2, world.getHeight() - screenHeight));
+    }
+
+    private int scrollLeft() {
+        return Math.max(0, Math.min(world.getPlayer().x - screenWidth / 2, world.getWidth() - screenWidth));
+    }
+
+    private void writeSafe(AsciiPanel terminal, char c, int x, int y, Color color) {
+        if (x > 0 && x < screenWidth && y > 0 && y < screenHeight) {
+            terminal.write(c, x, y, color);
+        }
     }
 }

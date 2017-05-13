@@ -11,13 +11,10 @@ public abstract class ActiveBeing extends Being {
 
     protected int xDirection;
     protected int yDirection;
-
     protected int health;
     protected int level;
     protected boolean immobilized;
-
     protected boolean alive;
-
     private SideEffect effect;
 
     public ActiveBeing(World world) {
@@ -62,7 +59,7 @@ public abstract class ActiveBeing extends Being {
             return;
         }
         xDirection = Math.max(0, Math.min(x + dx, world.getWidth() - 1));
-        yDirection  = Math.max(0, Math.min(y + dy, world.getHeight() - 1));
+        yDirection = Math.max(0, Math.min(y + dy, world.getHeight() - 1));
         if (canMove(xDirection, yDirection)) {
             x = xDirection;
             y = yDirection;
@@ -71,16 +68,16 @@ public abstract class ActiveBeing extends Being {
         interactWithEnvironment();
     }
 
+    public SideEffect getEffect() {
+        return effect;
+    }
+
     protected boolean canMove(int xTo, int yTo) {
         return world.getTile(xTo, yTo).isWalkable() && world.getMob(xTo, yTo) == null;
     }
 
-    public void setEffect(SideEffect effect) {
+    protected void setEffect(SideEffect effect) {
         this.effect = effect;
-    }
-
-    public SideEffect getEffect() {
-        return effect;
     }
 
 
