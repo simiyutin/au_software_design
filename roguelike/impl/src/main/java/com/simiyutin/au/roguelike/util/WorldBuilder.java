@@ -31,10 +31,15 @@ public class WorldBuilder {
     public WorldBuilder(int width, int height) {
         this.width = width;
         this.height = height;
+
         this.tiles = new Tile[width][height];
+        fillWithFloor();
+
         this.mobs = new ArrayList<>();
         this.loot = new ArrayList<>();
         this.minLevel = 1;
+
+
     }
 
     public World build() {
@@ -53,7 +58,7 @@ public class WorldBuilder {
         }
 
         for (Item w : loot) {
-            world.getLoot().add(new ThrownItem(w, world)); //todo circular dependency
+            world.getItems().add(new ThrownItem(w, world)); //todo circular dependency
         }
 
         world.setMinLevel(minLevel);
@@ -61,14 +66,15 @@ public class WorldBuilder {
         return world;
     }
 
-    public WorldBuilder ofMinLevel(int level) {
-        this.minLevel = level;
+    public WorldBuilder withCaves() {
+        randomizeTiles();
+        smooth(8);
         return this;
     }
 
-    public WorldBuilder makeCaves() {
-        return randomizeTiles()
-                .smooth(8);
+    public WorldBuilder ofMinLevel(int level) {
+        this.minLevel = level;
+        return this;
     }
 
     public WorldBuilder addMobs(Class<? extends Being> clazz, int quantity) {
@@ -101,16 +107,15 @@ public class WorldBuilder {
         return this;
     }
 
-    private WorldBuilder randomizeTiles() {
+    private void randomizeTiles() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 tiles[x][y] = Math.random() < 0.5 ? Tile.FLOOR : Tile.WALL;
             }
         }
-        return this;
     }
 
-    private WorldBuilder smooth(int times) {
+    private void smooth(int times) {
         Tile[][] tiles2 = new Tile[width][height];
         for (int time = 0; time < times; time++) {
 
@@ -136,6 +141,13 @@ public class WorldBuilder {
             }
             tiles = tiles2;
         }
-        return this;
+    }
+
+    private void fillWithFloor() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                tiles[i][j] = Tile.FLOOR;
+            }
+        }
     }
 }

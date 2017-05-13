@@ -34,10 +34,6 @@ public abstract class ActiveBeing extends Being {
         this.alive = alive;
     }
 
-    public boolean isImmobilized() {
-        return immobilized;
-    }
-
     public void setImmobilized(boolean immobilized) {
         this.immobilized = immobilized;
     }
@@ -72,18 +68,17 @@ public abstract class ActiveBeing extends Being {
         return effect;
     }
 
-    protected boolean canMove(int xTo, int yTo) {
+    public boolean canMove(int xTo, int yTo) {
         return world.getTile(xTo, yTo).isWalkable() && world.getMob(xTo, yTo) == null;
     }
+
+    public abstract void interactWithEnvironment();
 
     protected void setEffect(SideEffect effect) {
         this.effect = effect;
     }
 
-
     protected void moveRandom() {
         move(new Random().nextInt(3) - 1, new Random().nextInt(3) - 1);
     }
-
-    protected abstract void interactWithEnvironment();
 }

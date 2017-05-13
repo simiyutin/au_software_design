@@ -94,7 +94,7 @@ public class PlayScreen implements Screen {
     }
 
     private void displayLoot(AsciiPanel terminal, int left, int top) {
-        for (ThrownItem b: world.getLoot()) {
+        for (ThrownItem b: world.getItems()) {
             Item item = b.getItem();
             writeSafe(terminal, item.getGlyph(), b.x - left, b.y - top, item.getColor());
         }

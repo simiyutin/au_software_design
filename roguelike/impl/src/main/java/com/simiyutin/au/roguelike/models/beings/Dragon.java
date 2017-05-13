@@ -11,6 +11,8 @@ import java.awt.*;
  */
 public class Dragon extends ActiveBeing implements ArtificialIntelligence {
 
+    public static boolean isSelfActing = true;
+
     public Dragon(World world) {
         super(world);
 
@@ -18,7 +20,10 @@ public class Dragon extends ActiveBeing implements ArtificialIntelligence {
         this.color = Color.RED;
         enflameTiles();
 
-        new RecurringTask(this::move, 1000);
+
+        if (isSelfActing) {
+            new RecurringTask(this::move, 1000);
+        }
     }
 
     @Override
@@ -33,7 +38,7 @@ public class Dragon extends ActiveBeing implements ArtificialIntelligence {
     }
 
     @Override
-    protected void interactWithEnvironment() {
+    public void interactWithEnvironment() {
 
     }
 

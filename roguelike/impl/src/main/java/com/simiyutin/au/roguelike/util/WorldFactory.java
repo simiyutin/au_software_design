@@ -13,7 +13,19 @@ public class WorldFactory {
     public static World getOfMinLevel(int level) {
         World result = new WorldBuilder(100, 100)
                 .ofMinLevel(level)
-                .makeCaves()
+                .addMobs(Mushroom.class, 10)
+                .addMobs(Ghost.class, 10)
+                .addMobs(Dragon.class, 5)
+                .addWeapons(5)
+                .addMedAids(10)
+                .build();
+
+        return result;
+    }
+
+    public static World getTestConfig(int level) {
+        World result = new WorldBuilder(100, 100)
+                .ofMinLevel(level)
                 .addMobs(Mushroom.class, 10)
                 .addMobs(Ghost.class, 0)
                 .addMobs(Dragon.class, 1)

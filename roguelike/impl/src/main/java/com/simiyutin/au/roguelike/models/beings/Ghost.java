@@ -15,7 +15,9 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
 
     private static boolean moveTo = true;
 
-    private final int SMELL_RANGE = 15;
+    public static final int SMELL_RANGE = 15;
+    public static final int TRIGGER_RANGE = 3;
+    public static boolean isSelfActing = true;
 
     public Ghost(World world) {
         super(world);
@@ -23,12 +25,14 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
         this.glyph = 'G';
         this.color = Color.cyan;
 
-        new RecurringTask(this::move, 200);
+        if (isSelfActing) {
+            new RecurringTask(this::move, 200);
+        }
     }
 
     @Override
-    protected void interactWithEnvironment() {
-        if (distToPlayer(x, y) < 3) {
+    public void interactWithEnvironment() {
+        if (distToPlayer(x, y) < TRIGGER_RANGE) {
             SideEffect effect = world.getPlayer().getEffect();
             if (effect == INVERSED) {
                 world.getMobs().remove(this);
@@ -54,7 +58,6 @@ public class Ghost extends ActiveBeing implements ArtificialIntelligence {
             } else {
                 moveFromPlayer();
             }
-
         } else {
             moveRandom();
         }

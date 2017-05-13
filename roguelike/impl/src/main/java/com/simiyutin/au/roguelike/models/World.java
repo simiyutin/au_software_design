@@ -30,7 +30,7 @@ public class World {
         this.d.player = new Player(this);
     }
 
-    public List<ThrownItem> getLoot() {
+    public List<ThrownItem> getItems() {
         return d.loot;
     }
 
@@ -109,7 +109,7 @@ public class World {
     }
 
     public ThrownItem getItem(int x, int y) {
-        for (ThrownItem b : getLoot()) {
+        for (ThrownItem b : getItems()) {
             if (b.x == x && b.y == y) {
                 return b;
             }
@@ -157,7 +157,7 @@ public class World {
     private boolean isEmptyFloor(int x, int y) {
         return getTile(x, y) == Tile.FLOOR
                 && getMobs().stream().noneMatch(b -> b.x == x && b.y == y)
-                && getLoot().stream().noneMatch(b -> b.x == x && b.y == y);
+                && getItems().stream().noneMatch(b -> b.x == x && b.y == y);
     }
 
     private static class WorldData {

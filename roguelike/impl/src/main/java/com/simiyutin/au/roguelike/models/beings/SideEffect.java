@@ -21,7 +21,7 @@ public enum SideEffect {
             case KeyEvent.VK_D:
                 return KeyEvent.VK_A;
             default:
-                return 0;
+                return key;
         }
     });
 

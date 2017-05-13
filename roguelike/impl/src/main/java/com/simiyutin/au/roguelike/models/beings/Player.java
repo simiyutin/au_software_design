@@ -47,7 +47,7 @@ public class Player extends ActiveBeing {
     }
 
     @Override
-    protected void interactWithEnvironment() {
+    public void interactWithEnvironment() {
         int deltaHealth = world.getTile(x, y).getDeltaHealth();
         health += deltaHealth * level;
 
@@ -56,14 +56,14 @@ public class Player extends ActiveBeing {
             Item item = thrownItem.getItem();
             if (item instanceof Weapon) {
                 weapon = (Weapon) item;
-                world.getLoot().removeIf(w ->
+                world.getItems().removeIf(w ->
                         w.getItem() instanceof Weapon && ((Weapon) w.getItem()).getLevel() <= weapon.getLevel());
             } else if (item instanceof MedAid) {
                 health += ((MedAid) item).getValue();
                 health = Math.min(health, 100);
             }
             world.setMessage(String.format("picked %s", item.getName()));
-            world.getLoot().remove(thrownItem);
+            world.getItems().remove(thrownItem);
         }
 
         Being being = getMobNearMe();
