@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 
@@ -35,7 +36,15 @@ public class Scheduler extends JFrame implements KeyListener {
     }
 
     public void schedule() {
-        new RecurringTask(this::run, 10);
+        new RecurringTask(() -> {
+            try {
+                SwingUtilities.invokeAndWait(this::run);
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // todo log
+            } catch (InvocationTargetException e) {
+                e.printStackTrace(); // todo log
+            }
+        }, 1000 / 60);
     }
 
     @Override

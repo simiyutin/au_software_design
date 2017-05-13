@@ -63,6 +63,15 @@ public class World {
         tiles[x][y] = tile;
     }
 
+    public void printTiles() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                System.out.print(tiles[j][i].getGlyph() + " ");
+            }
+            System.out.println();
+        }
+    }
+
     public char getGlyph(int x, int y) {
         return getTile(x, y).getGlyph();
     }

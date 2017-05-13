@@ -71,6 +71,9 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_ENTER:
                 player.act();
                 break;
+            case KeyEvent.VK_P:
+                world.printTiles();
+                break;
         }
         return updateState();
     }
