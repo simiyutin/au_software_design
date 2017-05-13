@@ -10,8 +10,6 @@ public enum SideEffect {
 
     IDENTITY(Function.identity()),
 
-    IMMOBILIZED(key -> 0),
-
     INVERSED(key -> {
         switch (key) {
             case KeyEvent.VK_S:

@@ -22,6 +22,7 @@ public class WorldBuilder {
     private Tile[][] tiles;
     private List<Constructor<? extends Being>> mobs;
     private List<Item> loot;
+    private int minLevel;
 
     public WorldBuilder(int width, int height) {
         this.width = width;
@@ -29,6 +30,7 @@ public class WorldBuilder {
         this.tiles = new Tile[width][height];
         this.mobs = new ArrayList<>();
         this.loot = new ArrayList<>();
+        this.minLevel = 1;
     }
 
     public World build() {
@@ -45,7 +47,14 @@ public class WorldBuilder {
             world.getLoot().add(new ThrownItem(w, world)); //todo circular dependency
         }
 
+        world.setMinLevel(minLevel);
+
         return world;
+    }
+
+    public WorldBuilder ofMinLevel(int level) {
+        this.minLevel = level;
+        return this;
     }
 
     public WorldBuilder makeCaves() {

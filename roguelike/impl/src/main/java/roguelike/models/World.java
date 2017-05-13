@@ -15,58 +15,64 @@ import java.util.Random;
  * Created by boris on 08.05.17.
  */
 public class World {
-    private Tile[][] tiles;
-    private int width;
-    private int height;
-    private Player player;
-    private List<Being> mobs;
-    private String message = "";
-    private List<ThrownItem> loot;
+
+    private WorldData d;
 
     public List<ThrownItem> getLoot() {
-        return loot;
+        return d.loot;
+    }
+
+    public int getMinLevel() {
+        return d.minLevel;
+    }
+
+    public void setMinLevel(int minLevel) {
+        this.d.minLevel = minLevel;
     }
 
     public String getMessage() {
-        return message;
+        return d.message;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.d.message = message;
         new DelayedTask(() -> {
-            if (this.message.equals(message)) {
-                this.message = "";
+            if (this.d.message.equals(message)) {
+                this.d.message = "";
             }
         }, 1000);
     }
 
     public World(Tile[][] tiles) {
-        this.tiles = tiles;
-        this.width = tiles.length;
-        this.height = tiles[0].length;
+        this.d = new WorldData();
+        this.d.tiles = tiles;
+        this.d.width = tiles.length;
+        this.d.height = tiles[0].length;
 
-        this.mobs = new ArrayList<>();
-        this.loot = new ArrayList<>();
-        this.player = new Player(this);
-        this.mobs.add(this.player);
-
+        this.d.mobs = new ArrayList<>();
+        this.d.loot = new ArrayList<>();
+        this.d.minLevel = 1;
+        this.d.player = new Player(this);
+//        this.d.mobs.add(this.d.player);
     }
 
+
+
     public Tile getTile(int x, int y) {
-        if (x < 0 || x > width - 1 || y < 0 || y > height - 1) {
+        if (x < 0 || x > getWidth() - 1 || y < 0 || y > getHeight() - 1) {
             return Tile.BOUNDS;
         }
-        return tiles[x][y];
+        return d.tiles[x][y];
     }
 
     public void setTile(int x, int y, Tile tile) {
-        tiles[x][y] = tile;
+        d.tiles[x][y] = tile;
     }
 
     public void printTiles() {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                System.out.print(tiles[j][i].getGlyph() + " ");
+        for (int i = 0; i < d.width; i++) {
+            for (int j = 0; j < d.height; j++) {
+                System.out.print(d.tiles[j][i].getGlyph() + " ");
             }
             System.out.println();
         }
@@ -81,23 +87,23 @@ public class World {
     }
 
     public int getWidth() {
-        return width;
+        return d.width;
     }
 
     public int getHeight() {
-        return height;
+        return d.height;
     }
 
     public Player getPlayer() {
-        return player;
+        return d.player;
     }
 
     public List<Being> getMobs() {
-        return mobs;
+        return d.mobs;
     }
 
     public Being getMob(int x, int y) {
-        for (Being b : mobs) {
+        for (Being b : getMobs()) {
             if (b.x == x && b.y == y) {
                 return b;
             }
@@ -106,7 +112,7 @@ public class World {
     }
 
     public ThrownItem getItem(int x, int y) {
-        for (ThrownItem b : loot) {
+        for (ThrownItem b : getLoot()) {
             if (b.x == x && b.y == y) {
                 return b;
             }
@@ -130,9 +136,30 @@ public class World {
         return new Position(x, y);
     }
 
+    public void setPlayer(Player player) {
+        d.player = player;
+    }
+
+    public void swapData(World other) {
+        d = other.d;
+    }
+
+
+
     private boolean isEmptyFloor(int x, int y) {
         return getTile(x, y) == Tile.FLOOR
                 && getMobs().stream().noneMatch(b -> b.x == x && b.y == y)
                 && getLoot().stream().noneMatch(b -> b.x == x && b.y == y);
+    }
+
+    private static class WorldData {
+        private Tile[][] tiles;
+        private int width;
+        private int height;
+        private Player player;
+        private List<Being> mobs;
+        private String message = "";
+        private List<ThrownItem> loot;
+        private int minLevel;
     }
 }

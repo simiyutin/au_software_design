@@ -2,6 +2,7 @@ package roguelike.models.beings;
 
 import roguelike.DelayedTask;
 import roguelike.RecurringTask;
+import roguelike.models.Position;
 import roguelike.models.Tile;
 import roguelike.models.actions.Action;
 import roguelike.models.items.*;
@@ -52,6 +53,19 @@ public class Player extends ActiveBeing {
                 world.setMessage("press [enter] to start battle with dragon");
             }
         }
+
+        if (world.getTile(x, y) == Tile.Z_TELEPORT) {
+            zlevel();
+        }
+    }
+
+    public void zlevel() {
+        World newWorld = WorldFactory.getOfMinLevel(world.getMinLevel() + 1);
+        Position pos = newWorld.getEmptyPosition();
+        x = pos.x;
+        y = pos.y;
+        newWorld.setPlayer(this);
+        world.swapData(newWorld);
     }
 
     public Being getMobNearMe() {
@@ -126,6 +140,11 @@ public class Player extends ActiveBeing {
                 enemy.setAlive(false);
                 setImmobilized(false);
                 action = new RegularAction();
+                if (world.getMobs().stream().noneMatch(m -> m instanceof Dragon)) {
+                    world.setMessage("Killed last dragon. Find Z tile to proceed to next level");
+                    Position position = world.getEmptyPosition();
+                    world.setTile(position.x, position.y, Tile.Z_TELEPORT);
+                }
             }
         }
     }

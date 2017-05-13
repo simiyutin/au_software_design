@@ -8,20 +8,23 @@ import java.awt.*;
  * Created by boris on 08.05.17.
  */
 public enum Tile {
-    FLOOR('.', AsciiPanel.yellow, 0),
-    POISONED_FLOOR('.', Color.GREEN, -5),
-    ENFLAMED_FLOOR('.', Color.RED, -5),
-    WALL('#', AsciiPanel.yellow, 0),
-    BOUNDS('x', AsciiPanel.brightBlack, 0);
+    FLOOR('.', AsciiPanel.yellow, 0, true),
+    POISONED_FLOOR('.', Color.GREEN, -5, true),
+    ENFLAMED_FLOOR('.', Color.RED, -5, true),
+    WALL('#', AsciiPanel.yellow, 0, false),
+    Z_TELEPORT('Z', AsciiPanel.brightMagenta, 0, true),
+    BOUNDS('x', AsciiPanel.brightBlack, 0, false);
 
     private char glyph;
     private Color color;
     private int deltaHealth;
+    private boolean isWalkable;
 
-    Tile(char glyph, Color color, int deltaHealth) {
+    Tile(char glyph, Color color, int deltaHealth, boolean isWalkable) {
         this.glyph = glyph;
         this.color = color;
         this.deltaHealth = deltaHealth;
+        this.isWalkable = isWalkable;
     }
 
     public char getGlyph() {
@@ -37,7 +40,7 @@ public enum Tile {
     }
 
     public boolean isWalkable() {
-        return this == FLOOR || this == POISONED_FLOOR || this == ENFLAMED_FLOOR;
+        return isWalkable;
     }
 
     public boolean isDiggable() {
