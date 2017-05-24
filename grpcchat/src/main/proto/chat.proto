@@ -1,0 +1,14 @@
+syntax = "proto3";
+option java_package = "com.simiyutin.grpcchat";
+
+service Chat {
+    rpc RouteChat(stream Message) returns(stream Message) {}
+
+
+}
+
+message Message {
+    string text = 1;
+    string from = 2;
+    string time = 3;
+}
