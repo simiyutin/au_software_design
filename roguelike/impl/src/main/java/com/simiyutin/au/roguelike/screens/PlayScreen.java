@@ -1,15 +1,14 @@
 package com.simiyutin.au.roguelike.screens;
 
 import asciiPanel.AsciiPanel;
-import com.simiyutin.au.roguelike.Main;
-import com.simiyutin.au.roguelike.models.*;
-import com.simiyutin.au.roguelike.models.beings.*;
+import com.simiyutin.au.roguelike.models.World;
+import com.simiyutin.au.roguelike.models.beings.Being;
+import com.simiyutin.au.roguelike.models.beings.Player;
 import com.simiyutin.au.roguelike.models.items.Item;
 import com.simiyutin.au.roguelike.models.items.ThrownItem;
 import com.simiyutin.au.roguelike.util.WorldFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -17,10 +16,10 @@ import java.awt.event.KeyEvent;
 
 public class PlayScreen implements Screen {
 
+    private static final Logger LOGGER = LogManager.getLogger(PlayScreen.class);
     private final World world;
     private final int screenWidth = 80;
     private final int screenHeight = 24;
-    private static final Logger LOGGER = LogManager.getLogger(PlayScreen.class);
 
 
     public PlayScreen() {
@@ -63,6 +62,9 @@ public class PlayScreen implements Screen {
                 break;
             case KeyEvent.VK_Z:
                 world.getPlayer().levelUp();
+                break;
+            case KeyEvent.VK_I:
+                world.getPlayer().changeWeapon();
                 break;
         }
         return updateState();

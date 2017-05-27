@@ -1,5 +1,6 @@
 package com.simiyutin.au.roguelike.models.beings;
 
+import com.google.common.collect.Iterators;
 import com.simiyutin.au.roguelike.models.Position;
 import com.simiyutin.au.roguelike.models.Tile;
 import com.simiyutin.au.roguelike.models.World;
@@ -12,14 +13,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 
 public class Player extends ActiveBeing {
 
-    private Weapon weapon;
-    private Action action;
-
     private static final Logger LOGGER = LogManager.getLogger(Player.class);
+    private Weapon weapon;
+    private Iterator<Weapon> weaponIterator;
+    private Action action;
 
     public Player(World world) {
         super(world);
@@ -27,6 +32,7 @@ public class Player extends ActiveBeing {
         this.glyph = 'X';
         this.color = Color.BLUE;
         this.weapon = WeaponType.HAND.getItem();
+        this.weaponIterator = Iterators.cycle(this.weapon);
         this.action = new RegularAction();
     }
 
@@ -49,6 +55,45 @@ public class Player extends ActiveBeing {
         return weapon;
     }
 
+    public void changeWeapon() {
+        weapon = weaponIterator.next();
+    }
+
+    private void addWeapon(Weapon newWeapon) {
+        java.util.List<Integer> a = new ArrayList<>();
+        a.add(1);
+        a.add(2);
+
+        java.util.List<Integer> b = new ArrayList<>();
+        a.add(3);
+        a.add(4);
+
+        Iterator<Integer> it = Iterators.concat(a.iterator(), b.iterator());
+
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+
+        Set<Weapon> weapons = linearizeWeapons();
+        weapons.add(newWeapon);
+
+        weaponIterator = Iterators.cycle(weapons);
+    }
+
+    private Set<Weapon> linearizeWeapons() {
+        Set<Weapon> list = new HashSet<>();
+        Weapon fst = weaponIterator.next();
+
+        list.add(fst);
+        Weapon next = weaponIterator.next();
+        while (next != fst) {
+            list.add(next);
+            next = weaponIterator.next();
+        }
+
+        return list;
+    }
+
     @Override
     public void interactWithEnvironment() {
         int deltaHealth = world.getTile(x, y).getDeltaHealth();
@@ -59,7 +104,7 @@ public class Player extends ActiveBeing {
             Item item = thrownItem.getItem();
             if (item instanceof Weapon) {
                 LOGGER.trace(String.format("picked up weapon: %s", item.getName()));
-                weapon = (Weapon) item;
+                addWeapon((Weapon) item);
                 world.getItems().removeIf(w ->
                         w.getItem() instanceof Weapon && ((Weapon) w.getItem()).getLevel() <= weapon.getLevel());
             } else if (item instanceof MedAid) {
@@ -143,8 +188,9 @@ public class Player extends ActiveBeing {
             if (enemy.getHealth() < 0) {
                 world.setMessage("You won!");
                 LOGGER.trace("player won battle with dragon");
-                weapon = Weapon.getRandomOfLevel(enemy.getLevel() + 2);
-                new DelayedTask(() -> world.setMessage(String.format("Obtained %s", weapon.getName())), 1000);
+                Weapon newWeapon = Weapon.getRandomOfLevel(enemy.getLevel() + 2);
+                addWeapon(newWeapon);
+                new DelayedTask(() -> world.setMessage(String.format("Obtained %s", newWeapon.getName())), 1000);
                 world.getMobs().remove(enemy);
                 enemy.setAlive(false);
                 setImmobilized(false);
