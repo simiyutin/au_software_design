@@ -13,7 +13,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -60,20 +59,6 @@ public class Player extends ActiveBeing {
     }
 
     private void addWeapon(Weapon newWeapon) {
-        java.util.List<Integer> a = new ArrayList<>();
-        a.add(1);
-        a.add(2);
-
-        java.util.List<Integer> b = new ArrayList<>();
-        a.add(3);
-        a.add(4);
-
-        Iterator<Integer> it = Iterators.concat(a.iterator(), b.iterator());
-
-        while (it.hasNext()) {
-            System.out.println(it.next());
-        }
-
         Set<Weapon> weapons = linearizeWeapons();
         weapons.add(newWeapon);
 
