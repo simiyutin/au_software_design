@@ -2,6 +2,8 @@ group 'simiyutin'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = "com.simiyutin.au.shell.core.Main"
 
 sourceCompatibility = 1.8
 
@@ -9,6 +11,14 @@ repositories {
     mavenCentral()
 }
 
+run{
+    standardInput = System.in
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    // https://mvnrepository.com/artifact/commons-cli/commons-cli
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.2'
+
 }
