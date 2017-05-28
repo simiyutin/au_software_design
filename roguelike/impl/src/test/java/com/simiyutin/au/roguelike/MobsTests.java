@@ -11,8 +11,7 @@ import com.simiyutin.au.roguelike.util.WorldBuilder;
 import org.junit.Test;
 
 import static java.lang.Thread.sleep;
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -143,7 +142,8 @@ public class MobsTests {
         player.y = sword.y;
 
         player.interactWithEnvironment();
-        assertThat(player.getWeapon() , is(sword.getItem()));
+        player.changeWeapon();
+        assertEquals(sword.getItem(), player.getWeapon());
         assertTrue(world.getThrownItems().isEmpty());
     }
 

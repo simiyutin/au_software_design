@@ -13,9 +13,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.awt.*;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -70,19 +70,21 @@ public class Player extends ActiveBeing {
     }
 
     private void addWeapon(Weapon newWeapon) {
-        Set<Weapon> weapons = linearizeWeapons();
-        weapons.add(newWeapon);
-
+        List<Weapon> weapons = linearizeWeapons();
+        if (!weapons.contains(newWeapon)) {
+            weapons.add(newWeapon);
+        }
         weaponIterator = Iterators.cycle(weapons);
+        changeWeapon();
     }
 
-    private Set<Weapon> linearizeWeapons() {
-        Set<Weapon> list = new HashSet<>();
+    private List<Weapon> linearizeWeapons() {
+        List<Weapon> list = new ArrayList<>();
 
-        Weapon fst = weaponIterator.next();
-        list.add(fst);
+
+        list.add(weapon);
         Weapon next = weaponIterator.next();
-        while (next != fst) {
+        while (next != weapon) {
             list.add(next);
             next = weaponIterator.next();
         }
