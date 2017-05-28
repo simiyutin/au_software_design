@@ -1,17 +1,20 @@
 package com.simiyutin.au.roguelike.models;
 
 
-import com.simiyutin.au.roguelike.util.DelayedTask;
 import com.simiyutin.au.roguelike.models.beings.Being;
 import com.simiyutin.au.roguelike.models.beings.Player;
 import com.simiyutin.au.roguelike.models.items.ThrownItem;
+import com.simiyutin.au.roguelike.util.DelayedTask;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 
+/**
+ * Holds map, player, mobs and loot.
+ */
 public class World {
 
     private WorldData d;
@@ -23,15 +26,18 @@ public class World {
         this.d.height = tiles[0].length;
 
         this.d.mobs = new ArrayList<>();
-        this.d.loot = new ArrayList<>();
+        this.d.thrownItems = new ArrayList<>();
         this.d.minLevel = 1;
         this.d.player = new Player(this);
     }
 
-    public List<ThrownItem> getItems() {
-        return d.loot;
+    public List<ThrownItem> getThrownItems() {
+        return d.thrownItems;
     }
 
+    /**
+     * minLevel defines minimum level of items and mobs.
+     */
     public int getMinLevel() {
         return d.minLevel;
     }
@@ -40,6 +46,9 @@ public class World {
         this.d.minLevel = minLevel;
     }
 
+    /**
+     * @return message that will be displayed on top of a screen.
+     */
     public String getMessage() {
         return d.message;
     }
@@ -53,6 +62,9 @@ public class World {
         }, 1000);
     }
 
+    /**
+     * @return Tile at given position.
+     */
     public Tile getTile(int x, int y) {
         if (x < 0 || x > getWidth() - 1 || y < 0 || y > getHeight() - 1) {
             return Tile.BOUNDS;
@@ -64,6 +76,9 @@ public class World {
         d.tiles[x][y] = tile;
     }
 
+    /**
+     * Print current map co console.
+     */
     public void printTiles() {
         for (int i = 0; i < d.width; i++) {
             for (int j = 0; j < d.height; j++) {
@@ -73,10 +88,16 @@ public class World {
         }
     }
 
+    /**
+     * @return glyph of the tile at given position.
+     */
     public char getGlyph(int x, int y) {
         return getTile(x, y).getGlyph();
     }
 
+    /**
+     * @return color of the tile at given position.
+     */
     public Color getColor(int x, int y) {
         return getTile(x, y).getColor();
     }
@@ -93,10 +114,17 @@ public class World {
         return d.player;
     }
 
+    public void setPlayer(Player player) {
+        d.player = player;
+    }
+
     public List<Being> getMobs() {
         return d.mobs;
     }
 
+    /**
+     * @return mob at given position. (except player)
+     */
     public Being getMob(int x, int y) {
         for (Being b : getMobs()) {
             if (b.x == x && b.y == y) {
@@ -106,8 +134,11 @@ public class World {
         return null;
     }
 
+    /**
+     * @return thrown item at given position.
+     */
     public ThrownItem getItem(int x, int y) {
-        for (ThrownItem b : getItems()) {
+        for (ThrownItem b : getThrownItems()) {
             if (b.x == x && b.y == y) {
                 return b;
             }
@@ -115,6 +146,9 @@ public class World {
         return null;
     }
 
+    /**
+     * @return walkable position free of mobs.
+     */
     public Position getEmptyPosition() {
         Random randomGen = new Random();
 
@@ -131,10 +165,9 @@ public class World {
         return new Position(x, y);
     }
 
-    public void setPlayer(Player player) {
-        d.player = player;
-    }
-
+    /**
+     * Set all tiles in given radius to given type.
+     */
     public void setTilesAround(int x, int y, int radius, Tile tile) {
         for (int i = -radius; i <= radius; i++) {
             for (int j = -radius; j <= radius; j++) {
@@ -147,6 +180,9 @@ public class World {
         }
     }
 
+    /**
+     * move data from another world to current.
+     */
     public void moveDataFrom(World other) {
         d = other.d;
     }
@@ -155,7 +191,7 @@ public class World {
     private boolean isEmptyFloor(int x, int y) {
         return getTile(x, y) == Tile.FLOOR
                 && getMobs().stream().noneMatch(b -> b.x == x && b.y == y)
-                && getItems().stream().noneMatch(b -> b.x == x && b.y == y);
+                && getThrownItems().stream().noneMatch(b -> b.x == x && b.y == y);
     }
 
     private static class WorldData {
@@ -165,7 +201,7 @@ public class World {
         private Player player;
         private List<Being> mobs;
         private String message = "";
-        private List<ThrownItem> loot;
+        private List<ThrownItem> thrownItems;
         private int minLevel;
     }
 }

@@ -23,7 +23,7 @@ public class WorldBuilderTests {
         World world = new WorldBuilder(100, 100).build();
         assertThat(world.getHeight(), is(100));
         assertThat(world.getWidth(), is(100));
-        assertTrue(world.getItems().isEmpty());
+        assertTrue(world.getThrownItems().isEmpty());
         assertTrue(world.getMobs().isEmpty());
         assertTrue(world.getPlayer().isAlive());
         assertThat(world.getPlayer().getWeapon(), CoreMatchers.notNullValue());
@@ -64,7 +64,7 @@ public class WorldBuilderTests {
             }
         }
 
-        for (ThrownItem item : world.getItems()) {
+        for (ThrownItem item : world.getThrownItems()) {
             if (item.getItem() instanceof Weapon) {
                 Weapon w = ((Weapon) item.getItem());
                 assertTrue(w.getLevel() >= world.getMinLevel());
@@ -80,9 +80,9 @@ public class WorldBuilderTests {
                 .addWeapons(10)
                 .build();
 
-        assertThat(world.getItems().stream().map(ThrownItem::getItem).filter(i -> i instanceof Weapon).count(), is(10L));
+        assertThat(world.getThrownItems().stream().map(ThrownItem::getItem).filter(i -> i instanceof Weapon).count(), is(10L));
 
-        for (Item item : world.getItems().stream().map(ThrownItem::getItem).filter(i -> i instanceof Weapon).collect(Collectors.toList())) {
+        for (Item item : world.getThrownItems().stream().map(ThrownItem::getItem).filter(i -> i instanceof Weapon).collect(Collectors.toList())) {
             Weapon weapon = (Weapon) item;
             assertTrue(weapon.getLevel() >= world.getMinLevel());
         }
@@ -96,6 +96,6 @@ public class WorldBuilderTests {
                 .addMedAids(10)
                 .build();
 
-        assertThat(world.getItems().stream().map(ThrownItem::getItem).filter(i -> i instanceof MedAid).count(), is(10L));
+        assertThat(world.getThrownItems().stream().map(ThrownItem::getItem).filter(i -> i instanceof MedAid).count(), is(10L));
     }
 }

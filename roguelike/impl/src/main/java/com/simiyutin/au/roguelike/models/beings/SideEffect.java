@@ -4,6 +4,9 @@ import java.awt.event.KeyEvent;
 import java.util.function.Function;
 
 
+/**
+ * Entity that maps user input to one of predefined profiles.
+ */
 public enum SideEffect {
 
     IDENTITY(Function.identity()),

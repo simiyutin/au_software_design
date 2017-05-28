@@ -6,6 +6,9 @@ import com.simiyutin.au.roguelike.models.World;
 import java.awt.*;
 
 
+/**
+ * Static being. Poisons tiles around self and does nothing else.
+ */
 public class Mushroom extends Being {
 
     public Mushroom(World world) {

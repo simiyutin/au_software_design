@@ -4,6 +4,9 @@ import java.awt.*;
 import java.util.Random;
 
 
+/**
+ * Generates color from preset color range.
+ */
 public class RandomBGColorGenerator {
     private final Random randomGen = new Random(42);
 

@@ -4,6 +4,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
+/**
+ * Runnable with delayed start.
+ */
 public class DelayedTask {
 
     public DelayedTask(Runnable task, long timeout) {

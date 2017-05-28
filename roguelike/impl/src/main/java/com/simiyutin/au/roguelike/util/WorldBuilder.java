@@ -18,17 +18,19 @@ import java.util.List;
 import java.util.Random;
 
 
+/**
+ * Builds world. (!)
+ */
 public class WorldBuilder {
 
+    private static final RandomBGColorGenerator colorGen = new RandomBGColorGenerator();
+    private static final Logger LOGGER = LogManager.getLogger(WorldBuilder.class);
     private int width;
     private int height;
     private Tile[][] tiles;
     private List<Constructor<? extends Being>> mobs;
     private List<Item> loot;
     private int minLevel;
-    private static final RandomBGColorGenerator colorGen = new RandomBGColorGenerator();
-
-    private static final Logger LOGGER = LogManager.getLogger(WorldBuilder.class);
 
     public WorldBuilder(int width, int height) {
         this.width = width;
@@ -60,7 +62,7 @@ public class WorldBuilder {
         }
 
         for (Item w : loot) {
-            world.getItems().add(new ThrownItem(w, world)); //todo circular dependency
+            world.getThrownItems().add(new ThrownItem(w, world)); //todo circular dependency
         }
 
         world.setMinLevel(minLevel);
@@ -68,17 +70,26 @@ public class WorldBuilder {
         return world;
     }
 
+    /**
+     * Add random caves to world.
+     */
     public WorldBuilder withCaves() {
         randomizeTiles();
         smooth(8);
         return this;
     }
 
+    /**
+     * Set minimum level of mobs and items.
+     */
     public WorldBuilder ofMinLevel(int level) {
         this.minLevel = level;
         return this;
     }
 
+    /**
+     * Add mobs of given class and given quantity.
+     */
     public WorldBuilder addMobs(Class<? extends Being> clazz, int quantity) {
         for (int i = 0; i < quantity; i++) {
             try {
@@ -90,6 +101,9 @@ public class WorldBuilder {
         return this;
     }
 
+    /**
+     * Add random weapons of given quantity.
+     */
     public WorldBuilder addWeapons(int quantity) {
         Random randGen = new Random();
         for (int i = 0; i < quantity; i++) {
@@ -99,6 +113,9 @@ public class WorldBuilder {
         return this;
     }
 
+    /**
+     * Add medAids of given quantity.
+     */
     public WorldBuilder addMedAids(int quantity) {
         for (int i = 0; i < quantity; i++) {
             MedAid medAid = new MedAid();

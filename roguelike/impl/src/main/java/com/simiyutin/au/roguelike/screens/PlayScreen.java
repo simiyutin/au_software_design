@@ -14,6 +14,9 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 
+/**
+ * Main screen where all the business takes place.
+ */
 public class PlayScreen implements Screen {
 
     private static final Logger LOGGER = LogManager.getLogger(PlayScreen.class);
@@ -23,7 +26,7 @@ public class PlayScreen implements Screen {
 
 
     public PlayScreen() {
-        world = WorldFactory.getOfMinLevel(1);
+        world = WorldFactory.getDefaultConfigurationOfMinLevel(1);
         LOGGER.trace("Game screen created");
     }
 
@@ -99,7 +102,7 @@ public class PlayScreen implements Screen {
     }
 
     private void displayLoot(AsciiPanel terminal, int left, int top) {
-        for (ThrownItem b: world.getItems()) {
+        for (ThrownItem b : world.getThrownItems()) {
             Item item = b.getItem();
             writeSafe(terminal, item.getGlyph(), b.x - left, b.y - top, item.getColor());
         }

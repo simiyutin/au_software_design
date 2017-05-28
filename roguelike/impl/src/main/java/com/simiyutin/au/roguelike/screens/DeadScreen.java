@@ -1,13 +1,15 @@
 package com.simiyutin.au.roguelike.screens;
 
 import asciiPanel.AsciiPanel;
-import com.simiyutin.au.roguelike.Main;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.awt.event.KeyEvent;
 
 
+/**
+ * "You are dead. Retry?" screen
+ */
 public class DeadScreen implements Screen {
     private static final Logger LOGGER = LogManager.getLogger(DeadScreen.class);
 

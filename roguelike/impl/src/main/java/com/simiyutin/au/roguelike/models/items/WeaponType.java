@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 
+/**
+ * Specifies glyph, color and initial damage of weapon of given type.
+ */
 public enum WeaponType {
     HAND('h', "hand", 1, 10),
     SWORD('>', "sword", 10, 150);
@@ -19,6 +22,15 @@ public enum WeaponType {
         this.name = name;
         this.harm = harm;
         this.hue = hue;
+    }
+
+    /**
+     * @return random weapon except "HAND"
+     */
+    public static WeaponType getRandom() {
+        List<WeaponType> types = Arrays.asList(SWORD);
+        Integer ind = new Random().nextInt(types.size());
+        return types.get(ind);
     }
 
     public String getName() {
@@ -39,11 +51,5 @@ public enum WeaponType {
 
     public Weapon getItem() {
         return new Weapon(this, 1);
-    }
-
-    public static WeaponType getRandom() {
-        List<WeaponType> types = Arrays.asList(SWORD);
-        Integer ind = new Random().nextInt(types.size());
-        return types.get(ind);
     }
 }

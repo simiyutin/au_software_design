@@ -1,7 +1,7 @@
 package com.simiyutin.au.roguelike.models.beings;
 
-import com.simiyutin.au.roguelike.util.RecurringTask;
 import com.simiyutin.au.roguelike.models.World;
+import com.simiyutin.au.roguelike.util.RecurringTask;
 
 import java.awt.*;
 
@@ -9,13 +9,16 @@ import static com.simiyutin.au.roguelike.models.beings.SideEffect.IDENTITY;
 import static com.simiyutin.au.roguelike.models.beings.SideEffect.INVERSED;
 
 
+/**
+ * Walking mob with AI. It moves randomly, if smells player, chases him.
+ * On success, Ghost inverts controls of a player and starts to run away. So do all other Ghosts on the map .
+ */
 public class Ghost extends ActiveBeing implements ArtificialIntelligence {
-
-    private static boolean moveTo = true;
 
     public static final int SMELL_RANGE = 15;
     public static final int TRIGGER_RANGE = 3;
     public static boolean isSelfActing = true;
+    private static boolean moveTo = true;
 
     public Ghost(World world) {
         super(world);

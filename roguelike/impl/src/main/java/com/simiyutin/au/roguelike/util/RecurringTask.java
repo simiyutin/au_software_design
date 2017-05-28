@@ -3,6 +3,9 @@ package com.simiyutin.au.roguelike.util;
 import java.util.TimerTask;
 
 
+/**
+ * Runnable with period of repetition.
+ */
 public class RecurringTask {
 
     public RecurringTask(Runnable task, long period) {

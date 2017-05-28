@@ -3,6 +3,9 @@ package com.simiyutin.au.roguelike.models.items;
 import java.awt.*;
 
 
+/**
+ * Weapon itself.
+ */
 public class Weapon implements Item {
     private final int MAX_LEVEL = 10;
     private WeaponType type;
@@ -13,6 +16,9 @@ public class Weapon implements Item {
         this.level = level;
     }
 
+    /**
+     * Get weapon of random type of given level.
+     */
     public static Weapon getRandomOfLevel(int level) {
         return new Weapon(WeaponType.getRandom(), level);
     }
@@ -27,6 +33,9 @@ public class Weapon implements Item {
         return type.getName() + String.format(" of level %d", level);
     }
 
+    /**
+     * @return measure of harm this weapon can damage.
+     */
     public int getHarm() {
         return type.getHarm();
     }

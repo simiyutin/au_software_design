@@ -1,11 +1,11 @@
 package com.simiyutin.au.roguelike.models.beings;
 
 import com.google.common.collect.Iterators;
+import com.simiyutin.au.roguelike.models.Action;
 import com.simiyutin.au.roguelike.models.Position;
 import com.simiyutin.au.roguelike.models.Tile;
 import com.simiyutin.au.roguelike.models.World;
 import com.simiyutin.au.roguelike.models.items.*;
-import com.simiyutin.au.roguelike.util.Action;
 import com.simiyutin.au.roguelike.util.DelayedTask;
 import com.simiyutin.au.roguelike.util.RecurringTask;
 import com.simiyutin.au.roguelike.util.WorldFactory;
@@ -18,6 +18,9 @@ import java.util.Iterator;
 import java.util.Set;
 
 
+/**
+ * Player himself. Can move around, pick up weapons and health packs, dig through walls and attack dragons.
+ */
 public class Player extends ActiveBeing {
 
     private static final Logger LOGGER = LogManager.getLogger(Player.class);
@@ -35,9 +38,13 @@ public class Player extends ActiveBeing {
         this.action = new RegularAction();
     }
 
+
+    /**
+     * Each level of player is followed by world of incremented level.
+     */
     public void levelUp() {
         level++;
-        World newWorld = WorldFactory.getOfMinLevel(world.getMinLevel() + 1);
+        World newWorld = WorldFactory.getDefaultConfigurationOfMinLevel(world.getMinLevel() + 1);
         Position pos = newWorld.getEmptyPosition();
         x = pos.x;
         y = pos.y;
@@ -46,6 +53,10 @@ public class Player extends ActiveBeing {
         LOGGER.trace("player level upped");
     }
 
+
+    /**
+     * Do something on pressing [enter] key. "something" is taken from context.
+     */
     public void act() {
         action.act();
     }
@@ -67,8 +78,8 @@ public class Player extends ActiveBeing {
 
     private Set<Weapon> linearizeWeapons() {
         Set<Weapon> list = new HashSet<>();
-        Weapon fst = weaponIterator.next();
 
+        Weapon fst = weaponIterator.next();
         list.add(fst);
         Weapon next = weaponIterator.next();
         while (next != fst) {
@@ -90,7 +101,7 @@ public class Player extends ActiveBeing {
             if (item instanceof Weapon) {
                 LOGGER.trace(String.format("picked up weapon: %s", item.getName()));
                 addWeapon((Weapon) item);
-                world.getItems().removeIf(w ->
+                world.getThrownItems().removeIf(w ->
                         w.getItem() instanceof Weapon && ((Weapon) w.getItem()).getLevel() <= weapon.getLevel());
             } else if (item instanceof MedAid) {
                 LOGGER.trace("picked up med aid");
@@ -98,7 +109,7 @@ public class Player extends ActiveBeing {
                 health = Math.min(health, 100);
             }
             world.setMessage(String.format("picked %s", item.getName()));
-            world.getItems().remove(thrownItem);
+            world.getThrownItems().remove(thrownItem);
         }
 
         Being being = getMobNearMe();
@@ -140,6 +151,9 @@ public class Player extends ActiveBeing {
         return Math.hypot(toX - x, toY - y);
     }
 
+    /**
+     * Describes how to act in normal mode.
+     */
     class RegularAction implements Action {
 
         @Override
@@ -157,6 +171,9 @@ public class Player extends ActiveBeing {
         }
     }
 
+    /**
+     * Describes how to act in attacking mode.
+     */
     class AttackingAction implements Action {
         private ActiveBeing enemy;
 

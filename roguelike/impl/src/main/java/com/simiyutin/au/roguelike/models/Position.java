@@ -1,6 +1,9 @@
 package com.simiyutin.au.roguelike.models;
 
 
+/**
+ * Position itself.
+ */
 public class Position {
     public int x;
     public int y;

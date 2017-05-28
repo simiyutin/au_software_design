@@ -6,13 +6,15 @@ import com.simiyutin.au.roguelike.models.World;
 import java.awt.*;
 
 
+/**
+ * Base being class. This beings can only exist at given position/
+ */
 public abstract class Being {
+    protected final World world;
     public int x;
     public int y;
-
     protected char glyph;
     protected Color color;
-    protected final World world;
 
     public Being(World world) {
         this.world = world;

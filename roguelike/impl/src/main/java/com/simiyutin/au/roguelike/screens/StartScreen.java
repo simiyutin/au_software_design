@@ -7,6 +7,9 @@ import org.apache.logging.log4j.Logger;
 import java.awt.event.KeyEvent;
 
 
+/**
+ * "Press [enter] to start" screen.
+ */
 public class StartScreen implements Screen {
 
     private static final Logger LOGGER = LogManager.getLogger(StartScreen.class);

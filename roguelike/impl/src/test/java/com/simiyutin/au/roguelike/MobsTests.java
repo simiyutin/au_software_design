@@ -138,13 +138,13 @@ public class MobsTests {
     public void testPickUpWeapon() {
         init();
         ThrownItem sword = new ThrownItem(new Weapon(WeaponType.SWORD, 1), world);
-        world.getItems().add(sword);
+        world.getThrownItems().add(sword);
         player.x = sword.x;
         player.y = sword.y;
 
         player.interactWithEnvironment();
         assertThat(player.getWeapon() , is(sword.getItem()));
-        assertTrue(world.getItems().isEmpty());
+        assertTrue(world.getThrownItems().isEmpty());
     }
 
     @Test
@@ -153,7 +153,7 @@ public class MobsTests {
         ThrownItem medAidPos = new ThrownItem(new MedAid(), world);
         MedAid medAid = ((MedAid) medAidPos.getItem());
 
-        world.getItems().add(medAidPos);
+        world.getThrownItems().add(medAidPos);
         player.x = medAidPos.x;
         player.y = medAidPos.y;
         int prevHealth = player.getHealth();
@@ -161,7 +161,7 @@ public class MobsTests {
         player.interactWithEnvironment();
 
         assertThat(player.getHealth(), is(prevHealth - 10));
-        assertTrue(world.getItems().isEmpty());
+        assertTrue(world.getThrownItems().isEmpty());
     }
 
 

@@ -13,11 +13,13 @@ import java.awt.event.KeyListener;
 import java.lang.reflect.InvocationTargetException;
 
 
+/**
+ * Routes user input to current Screen object, iterates Screen periodically and repaints it.
+ */
 public class Scheduler extends JFrame implements KeyListener {
+    private static final Logger LOGGER = LogManager.getLogger(Scheduler.class);
     private AsciiPanel terminal;
     private Screen screen;
-
-    private static final Logger LOGGER = LogManager.getLogger(Scheduler.class);
 
     public Scheduler() {
         super();
@@ -33,7 +35,7 @@ public class Scheduler extends JFrame implements KeyListener {
         setVisible(true);
     }
 
-    public void run() {
+    private void iterate() {
         try {
             SwingUtilities.invokeAndWait(() -> {
                 screen = screen.updateState();
@@ -44,8 +46,11 @@ public class Scheduler extends JFrame implements KeyListener {
         }
     }
 
+    /**
+     * Begin iterating state.
+     */
     public void schedule() {
-        new RecurringTask(this::run, 1000 / 60);
+        new RecurringTask(this::iterate, 1000 / 60);
     }
 
     @Override

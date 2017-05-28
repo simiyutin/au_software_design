@@ -3,6 +3,9 @@ package com.simiyutin.au.roguelike.models.items;
 import java.awt.*;
 
 
+/**
+ * Health pack.
+ */
 public class MedAid implements Item {
 
     private int value = 50;
@@ -22,6 +25,9 @@ public class MedAid implements Item {
         return '+';
     }
 
+    /**
+     * @return how much health player will recover after picking this medAid up.
+     */
     public int getValue() {
         return value;
     }
